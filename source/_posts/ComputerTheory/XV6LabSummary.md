@@ -131,20 +131,23 @@ category: Computer Theory
 
 ### Basic Theory
 
--   Information required to properly handle **page faults**:
+-   **Information required** to properly handle **page faults**:
+
     -   The error **virtual address** in **stval**
     -   The error **reason** in **scause**
     -   The instruction address triggering page fault in **sepc or `trapframe->eps`**
 
--   Thoughts about **lazy page allocation**:
+-   **Thoughts** about **lazy page allocation**:
 
     -   **Just modify the value `p->sz`** but do not allocate pages in **`sbrk()` syscall**
 
         >   `sbrk()` **expands heap** to get new memory for process
 
-    -   Lazily allocate pages when **page faults with virtual address between** `p->sz` before and after `sbrk()`, and execute page fault instructions again
+    -   Lazily allocate pages when **page faults with virtual address between** `p->sz` before and after `sbrk()` occurs, and execute page fault instructions again
 
--   Simple implementation of lazy page allocation:
+-   Simple **implementation** of **lazy page allocation**:
+
+    -   Modify `sbrk()` by plan
 
     -   Handle a more trap case **page fault** in `usertrap()`, to `kalloc()` a **new page** and `mappages()` a **new map** in lazy allocation
 
@@ -167,7 +170,17 @@ category: Computer Theory
 
 ### Basic Theory
 
+-   **Thoughts** about **COW fork**:
 
+    -   **Just copy page table maps** of parent process but do not copy pages when creating child process, and set these maps **read-only**
+
+    -   Lazily copy pages when parent or child process **write these pages causing page faults**, and execute page fault instructions again
+
+        >   For recognizing this case, we need use **a new sign bit in PTE**, or we may not distinguish this case from writing **an originally read-only page**
+
+    -   Be careful to decide whether to **release a page** when parent process exits, for child process maybe using it
+
+        >   We can set **a reference counter** for these pages
 
 ### Task Analysis
 
@@ -175,3 +188,53 @@ category: Computer Theory
 
 
 
+## Lab 7: Multithreading
+
+### Basic Theory
+
+-   Three parts of thread’s status to keep when switching
+    -   Program counter
+    -   Registers storing variables
+    -   Program stack
+-   XV6
+    -   one thread per process
+
+### Task Analysis
+
+#### Task 1: Uthread: switching between threads
+
+#### Task 2: Using threads
+
+#### Task 3: Barrier
+
+
+
+## Lab 9: file system
+
+### Basic Theory
+
+
+
+### Task Analysis
+
+#### Task1: Large files
+
+#### Task2: Symbolic links
+
+
+
+## Lab10: mmap
+
+### Basic Theory
+
+-   Goals of memory mapped files: handle files with **memory related instructions** like `load` and `store`
+-   Thoughts about **eager mmap**: 
+    -   Copy the whole file to memory by **offset and length**, allocating pages
+    -   **Unmap and write back dirty block** after finishing handling the file
+-   Thoughts about **lazy mmap**: 
+    -   Just **match PTE with VMA** (Virtual Memory Area) which contains information about file but do not allocating pages
+    -   Lazily allocate pages when actually reading or writing mmap file causing **page fault**
+
+### Task Analysis
+
+#### Task1: mmap
