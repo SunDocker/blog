@@ -6,7 +6,6 @@ tags:
   - Computer
   - Operation System
 category: Computer Theory
-swiper_index: 4
 ---
 
 ## 1 操作系统概述

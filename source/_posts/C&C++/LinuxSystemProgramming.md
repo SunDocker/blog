@@ -6,7 +6,6 @@ tags:
   - Computer
   - Linux
 category: C & C++
-swiper_index: 2
 ---
 
 ## 1 常用工具

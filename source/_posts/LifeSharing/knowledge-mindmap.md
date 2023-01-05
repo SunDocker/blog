@@ -1,10 +1,9 @@
 ---
 title: 用抽象和具体的思维总结计算机知识
 tags:
-  - Computer
-  - abstract and concret
+    - Life Sharing
+    - Computer
 category: Life Sharing
-cover: /bgs/bg2.jpg
 abbrlink: 594cff7c
 date: 2022-09-20 08:52:52
 ---

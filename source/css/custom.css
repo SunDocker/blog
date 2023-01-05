@@ -407,9 +407,8 @@ button:not(:disabled) span {
 }
 
 .toc-content {
-    font-size: 88%;
+    font-size: 95%;
 }
-
 /* post toc */
 
 /* snackbar text center */
@@ -456,9 +455,43 @@ main.layout#content-inner {
 
 /* pagination */
 #pagination {
+    width: 100%;
     margin: auto;
 }
 span.space {
     color: #00c4b6;
 }
 /* pagination */
+
+/* hexo-butterfly-article-double-row */
+div#recent-posts>.recent-post-item>.recent-post-info>.content {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 15px;
+    font-size: 85%;
+}
+#recent-posts > .recent-post-item >.recent-post-info {
+    text-align: center;
+}
+div#recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap {
+    margin-bottom: 0;
+    font-size: 70%;
+}
+
+/* swiper */
+a.blog-slider__button {
+    display: none;
+}
+
+div.blog-slider {
+    min-height: 200px;
+    margin-bottom: 0;
+}
+
+/* aside card */
+div#aside-content .card-info .card-info-data {
+    display: none;
+}

@@ -4,8 +4,9 @@ tags:
   - Computer
 abbrlink: 6c24763b
 date: 2022-12-31 21:06:30
-sticky: 1
-swiper_index: 5
+category: Computer
+sticky: 4
+swiper_index: 4
 ---
 
 ## Computer Theory
