@@ -1,6 +1,5 @@
 ---
 title: XV6LabSummary
-date: 2023-01-05 11:24:08
 tags:
   - Computer
   - Operation System
@@ -8,6 +7,8 @@ tags:
   - MIT
   - Lab
 category: Computer Theory
+abbrlink: 8ecd89a3
+date: 2023-01-05 11:24:08
 ---
 
 ## Lab 4: traps
@@ -26,8 +27,10 @@ category: Computer Theory
 -   When to trap or What leads to trap:
 
     -   Syscall
-    -   Fault
+    -   Fault or Abort
     -   Device
+
+    >   We also call Syscall and Fault as ***Internal Interrupt* or Exception**
 
 -   Key point of traps: **Isolation & Security**
 
@@ -196,8 +199,14 @@ category: Computer Theory
     -   Program counter
     -   Registers storing variables
     -   Program stack
--   XV6
-    -   one thread per process
+-   XV6’s multithread mechanism
+    -   **One kernel thread** per user process, which **handling traps** for user process
+    -   **Only one user thread** per user process, which **controlling instructions** of user process 
+-   Implementation of multithread switch:
+    -   Timer interrupt: !!! <u>(wait for the interrupt learning)</u>
+        1.   **Hardware** produce interrupt periodically, convert user space into kernel’s timer interrupt handler
+        2.   timer interrupt handler **yields** CPU to **thread scheduler**, 
+
 
 ### Task Analysis
 
@@ -206,6 +215,39 @@ category: Computer Theory
 #### Task 2: Using threads
 
 #### Task 3: Barrier
+
+
+
+## Lab 8: locks
+
+### Basic Theory
+
+#### Interrupt
+
+>   Here we mainly talk about **the narrow interrupt**, not internal interrupt or exception
+
+-   Differences between **interrupt** and other trap causes (internal interrupt or exception):	
+
+    -   ***Asynchronous***: **Interrupt handler** has no relationship with current CPU running process
+    -   ***Concurrency***: **Devices generating interrupt** *concurrently run* with CPU
+    -   ***Program device***: Devices like network card also require programming
+
+-   Hardware about interrupt
+
+    -   PLIC **route interrupts** from devices to **CPU claiming** to receive interrupt
+    -   CPU will **notice PLIC** after handling interrupt
+
+    >   Kernel need to **program PLIC** to tell it how to route interrupts
+
+-   Software about interrupt
+
+#### Multiprocessors & Locking
+
+### Task Analysis
+
+#### Task1: Memory allocator
+
+#### Task2: Buffer cache
 
 
 
