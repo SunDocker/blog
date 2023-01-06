@@ -30,7 +30,7 @@ date: 2023-01-05 11:24:08
     -   Fault or Abort
     -   Device
 
-    >   We also call Syscall and Fault as ***Internal Interrupt* or Exception**
+    >   We also call Syscall and Fault as ***Software Interrupt*, Internal Interrupt or Exception**
 
 -   Key point of traps: **Isolation & Security**
 
@@ -195,18 +195,88 @@ date: 2023-01-05 11:24:08
 
 ### Basic Theory
 
+#### Interrupt
+
+>   Here we mainly talk about **the narrow interrupt**, not software interrupt
+
+-   Differences between **interrupt** and other trap causes (software interrupt):	
+
+    -   ***Asynchronous***: **Interrupt handler** has no relationship with current CPU running process
+    -   ***Concurrency***: **Devices generating interrupt** *concurrently run* with CPU
+    -   ***Program device***: Devices like network card also require programming
+
+-   **Related registers** about interrupt:
+
+    -   SIE: Supervisor Interrupt Enable, has one bit for **device interrupt**, one bit for **software interrupt** and one bit for **timer interrupt**
+    -   SSTATUS: Supervisor STATUS, has one bit to **open or close interrupt**
+    -   SIP: Supervisor Interrupt Pending, keep **the type of interrupt**
+
+-   Basic setting of interrupt (in `main()`):
+
+    1.   Program devices
+    2.   Program PLIC (`plicinit()`)
+    3.   Every CPU core call `plicinithart()` to show interest to device interrupts
+    4.   `scheduler()` to `intr_on()` opening interrupt and run process
+
+-   Hardware about interrupt:
+
+    -   PLIC **route interrupts** from devices to **CPU claiming** to receive interrupt
+    -   CPU handle interrupt with trap mechanism 
+    -   CPU will **notice PLIC** after handling interrupt
+
+    >   Kernel need to **program PLIC** to tell it how to route interrupts
+
+-   Software about interrupt / **Driver**:
+
+    -   Bottom part: **interrupt handler**
+    -   Top part: **interfaces** for user or kernel process
+
+#### Multithreading
+
 -   Three parts of thread’s status to keep when switching
-    -   Program counter
-    -   Registers storing variables
-    -   Program stack
+    -   **Program counter**
+    -   **Registers** storing variables
+    -   Program **stack**
+
 -   XV6’s multithread mechanism
     -   **One kernel thread** per user process, which **handling traps** for user process
-    -   **Only one user thread** per user process, which **controlling instructions** of user process 
--   Implementation of multithread switch:
-    -   Timer interrupt: !!! <u>(wait for the interrupt learning)</u>
-        1.   **Hardware** produce interrupt periodically, convert user space into kernel’s timer interrupt handler
-        2.   timer interrupt handler **yields** CPU to **thread scheduler**, 
+    -   **Only one user thread** per user process, which **controlling instructions** of user process
 
+    >   So we may conclude that in XV6, one user process has two threads, but they never run together
+
+-   Implementation of multithread switch / Timer interrupt:
+
+    1.   **Hardware** produce interrupt periodically, convert user space into ***<u>kernel</u>’s*** timer interrupt handler
+
+         >   With **trap** mechanism
+
+    2.   Timer interrupt handler **yields** CPU to **thread scheduler**
+
+         1.   Call `swtch()` to:
+
+              1.   Store kernel process’s **registers** into a `context`
+
+                   >   `context` is stored in corresponding **user process structure**
+
+              2.   Convert to this **CPU’s scheduler process** by restoring its `context`
+
+                   >   Every CPU has a **scheduler process** also in **kernel**;
+                   >
+                   >   Scheduler process’s `context` is stored in its **CPU structure**
+
+              3.   Execute `scheduler()`
+
+         2.   `scheduler()` switch another `RUNNABLE` process to `RUNNING`
+
+              1.   Set current `RUNNING` process to `RUNNABLE` and find another `RUNNABLE` process 
+              2.   Store this **CPU’s scheduler process** `context`
+              3.   **Restore** another kernel process’s `context` thus jumping to `swtch()` called before
+
+         3.   Another kernel finish **timer interrupt** and return to **user space**
+
+    >   Other interrupts causing **thread waiting** are similar to timer interrupt
+
+-   
 
 ### Task Analysis
 
@@ -222,26 +292,7 @@ date: 2023-01-05 11:24:08
 
 ### Basic Theory
 
-#### Interrupt
 
->   Here we mainly talk about **the narrow interrupt**, not internal interrupt or exception
-
--   Differences between **interrupt** and other trap causes (internal interrupt or exception):	
-
-    -   ***Asynchronous***: **Interrupt handler** has no relationship with current CPU running process
-    -   ***Concurrency***: **Devices generating interrupt** *concurrently run* with CPU
-    -   ***Program device***: Devices like network card also require programming
-
--   Hardware about interrupt
-
-    -   PLIC **route interrupts** from devices to **CPU claiming** to receive interrupt
-    -   CPU will **notice PLIC** after handling interrupt
-
-    >   Kernel need to **program PLIC** to tell it how to route interrupts
-
--   Software about interrupt
-
-#### Multiprocessors & Locking
 
 ### Task Analysis
 
