@@ -252,35 +252,37 @@ date: 2023-01-05 11:24:08
 
     2.   Timer interrupt handler **yields** CPU to **thread scheduler**
 
-         1.   Call `yield()` to acquire process’s lock, change process’s state to `RUNNABLE` and call `sched()`
+         1.   Call `yield()` to acquire process’s **lock**, change process’s **state** to `RUNNABLE` and call `sched()`
 
-         2.   `sched()` do some checks and call `swtch()`
+         2.   `sched()` do some checks and call `swtch`
 
-         3.   `swtch()`:
+         3.   `swtch`:
 
               1.   Store kernel process’s **registers** into a `context`
 
                    >   `context` is stored in corresponding **user process structure**
          
-              2.   Convert to this **CPU’s scheduler process** by restoring its `context`
+              2.   Convert to this **CPU’s scheduler process** by restoring its `context` thus jumping to `swtch()` called before
 
                    >   Every CPU has a **scheduler process** also in **kernel**;
                    >
                    >   Scheduler process’s `context` is stored in its **CPU structure**
 
-              3.   Execute `scheduler()`
+              3.   Continue executing `scheduler()`
          
          4.   `scheduler()` switch another `RUNNABLE` process to `RUNNING`
 
-              1.   Set current `RUNNING` process to `RUNNABLE` and find another `RUNNABLE` process 
-              2.   Store this **CPU’s scheduler process** `context`
-              3.   **Restore** another kernel process’s `context` thus jumping to `swtch()` called before
+              1.   Release process’s **lock**
+              2.   Find another `RUNNABLE` process
+              3.   Call `swtch`
          
-         5.   Another kernel finish **timer interrupt** and return to **user space**
+         5.   `swtch`
+         
+              1.   Store this **CPU’s scheduler process** `context`
+              2.   **Restore** another kernel process’s `context` thus jumping to `swtch()` called before
+              3.   Another kernel finish **timer interrupt** and return to **user space**
 
     >   Other interrupts causing **thread waiting** are similar to timer interrupt
-
--   
 
 ### Task Analysis
 
@@ -310,7 +312,67 @@ date: 2023-01-05 11:24:08
 
 ### Basic Theory
 
+>   The file system we talk about below is in XV6’s pattern
 
+#### 1 Disk Level
+
+*Disk layout:*
+
+-   Block0: **boot** block, launch operation system
+-   Block1: super **block**, describe file system
+-   Block2 - Block46: **metadata** block
+    -   Block2 - Block31: **log**
+    -   Block32 - Block45: **inode**
+    -   Block46: **bitmap** block
+-   Block47 - Block n (954 in total): **data** block
+
+#### 2 Buffer Cache Level
+
+#### 3 Logging Level
+
+#### 4 Inode Level
+
+*Inode Structure’s Fields:*
+
+-   `type`: file or directory, or this inode is free
+-   `nlink`: count how many file names link to this inode
+-   `size`: file or directory data bytes
+-   12 Direct block numbers: direct index to data block
+-   1 Indirect block number: one level indirect indiex to data block
+
+*Find nth byte in a file:*
+
+1.   `n / block_size` leads to the **block number**
+2.   `n % block_size` leads to the **byte offset** in a block
+
+#### 5 Directory Level
+
+>   Directory index block also follows index structrue above
+
+*Directory Data Block Structure / **Directory entries**:*
+
+-   16 bytes per entry
+    -   First 2 bytes: subdirectory’s or file’s **inode number**
+    -   Next 14 bytes: subdirectory’s or file’s **name**
+
+*Find a pathname:*
+
+1.   Begin with **`root ` inode** having index number 1 in XV6
+2.   Scan **`root`’s data blocks** find the first level pathname’s corresponding **index number**
+3.   Follow **index number** to find deeper level pathname in the data blocks
+4.   Repeat above steps until find the correct file or meet error
+
+*Create a file and firstly write data into it:*
+
+1.   **Allocate an inode** and write `type`, `nlink` and other infomation in it
+2.   Find parent directory and **create a new entry** in its data block
+3.   Modify **parent directory’s inode**: *size* and so on
+4.   Scan `bitmap` to find an unused **data block** for new file and update `bitmap`
+5.   Modify **new file’s inode**: *size*, *direct block number* and so on
+
+#### 6 Pathname Level
+
+#### 7 File Descriptor Level
 
 ### Task Analysis
 
