@@ -328,6 +328,48 @@ date: 2023-01-05 11:24:08
 
 #### 2 Buffer Cache Level
 
+>   We use *<u>buffer cache</u>* to represent all the cache, use *<u>block cache</u>* to represent a certain block in buffer cache
+
+*Allocate an inode / `ialloc()`:*
+
+-   Visit all inode blocks by `bread()`, check if it is free then use it, and `brelse()`
+
+-   `bread()`:
+
+    1.   Call `bget()` to get this block’s cache / `bget()`:
+
+         1.   `acquire()` **buffer cache’**s `spinlock`
+
+         2.   Visit **all block caches** to find if this block is already cached, if yes:
+
+              1.   Increase this block cache’s `refcnt`
+
+              2.   `release()` **buffer cache’**s `spinlock`
+
+              3.   `acquiresleep()` **block cache**’s `sleeplock`
+
+                   >   Anytime only one process can use a block cache, and it may cause much time to handle it. So there must be a `sleeplock`
+
+         3.   If not cached, recycle the **LRU free block cache** (`panic()` if no free block cache)
+
+              1.   If `refcnt` equals zero, then it is free. Set some fields of this block cache
+              2.   `release()` **buffer cache’**s `spinlock`
+              3.   `acquiresleep()` **block cache**’s `sleeplock`
+
+         >   One disk block can only have one block cache, or error may occur. So there must be a `spinlock` to protect buffer cache
+
+    2.   Read from **disk** if it is **not valid**
+
+    3.   Return the block cache
+
+-   `brelse()`:
+
+    1.   `releasesleep()` block cache’s `sleeplock`
+    2.   `acquire()` buffer cache’s `spinlock`
+    3.   Decrease this block cache’s `refcnt`
+    4.   If no process is waiting for this block cache (`refcnt==0`), then follow **LRU** to locate this block cache in buffer
+    5.   `release()` buffer cache’s `spinlock`
+
 #### 3 Logging Level
 
 #### 4 Inode Level
