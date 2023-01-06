@@ -252,12 +252,16 @@ date: 2023-01-05 11:24:08
 
     2.   Timer interrupt handler **yields** CPU to **thread scheduler**
 
-         1.   Call `swtch()` to:
+         1.   Call `yield()` to acquire process’s lock, change process’s state to `RUNNABLE` and call `sched()`
+
+         2.   `sched()` do some checks and call `swtch()`
+
+         3.   `swtch()`:
 
               1.   Store kernel process’s **registers** into a `context`
 
                    >   `context` is stored in corresponding **user process structure**
-
+         
               2.   Convert to this **CPU’s scheduler process** by restoring its `context`
 
                    >   Every CPU has a **scheduler process** also in **kernel**;
@@ -265,14 +269,14 @@ date: 2023-01-05 11:24:08
                    >   Scheduler process’s `context` is stored in its **CPU structure**
 
               3.   Execute `scheduler()`
-
-         2.   `scheduler()` switch another `RUNNABLE` process to `RUNNING`
+         
+         4.   `scheduler()` switch another `RUNNABLE` process to `RUNNING`
 
               1.   Set current `RUNNING` process to `RUNNABLE` and find another `RUNNABLE` process 
               2.   Store this **CPU’s scheduler process** `context`
               3.   **Restore** another kernel process’s `context` thus jumping to `swtch()` called before
-
-         3.   Another kernel finish **timer interrupt** and return to **user space**
+         
+         5.   Another kernel finish **timer interrupt** and return to **user space**
 
     >   Other interrupts causing **thread waiting** are similar to timer interrupt
 
