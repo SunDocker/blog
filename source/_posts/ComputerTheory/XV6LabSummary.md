@@ -126,9 +126,29 @@ date: 2023-01-05 11:24:08
 
 #### Task 2: Backtrace
 
+-   Comprehend function call stack’s structure, especially `fp` and `pre fp`, to correctly **back track** function call stack
+-   Through **`fp` and PAGE-align** to find the top of function call stack, for XV6 allocates **one page for each stack**
+
 #### Task 3: Alarm
 
+-   Where to call `fn`: where it handles **timer interrupt**
 
+-   When to call `fn`: 
+
+    -   n ticks, so we need a new filed in process structrue
+    -   Prevent re-entrant calls to the handler by adding a new field in process structure to sign if a handler is running
+
+-   How to call `fn`:
+
+    -   A new field in process structure to store `fn` address
+
+        >   But in kernel mode, we can’t directly use **user space address** to call `fn`
+
+    -   Modify user process **execution stream** to run `fn` by:
+
+        -   Modifying `sepc` in **trap handling**
+        -   **Store** user process previous **context** in `trapframe`
+        -   **Restore** user process previous context in `sigreturn`
 
 ## Lab 5: xv6 lazy page allocation
 
@@ -158,14 +178,20 @@ date: 2023-01-05 11:24:08
 
         >   XV6 `panic()` when this case happens, but actually this case **never happens** in unmodified XV6, and we require no `panic()` on this case in lazy allocation
 
-
 ### Task Analysis
 
 #### Task 1: Eliminate allocation from sbrk()
 
+-   Just follow thought and implementation in basic theory
+
 #### Task 2: Lazy allocation
 
+-   Just follow thought and implementation in basic theory
+
 #### Task 3: Lazytests and Usertests
+
+-   Just follow key points listed in guide book
+    -   When user process use lazy allocated virtual address, page fault causes trap. But when **syscall use lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `argaddr()` or `walkaddr()`
 
 
 
