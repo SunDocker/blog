@@ -413,21 +413,36 @@ date: 2023-01-05 11:24:08
 
 -   `begin_op()`
 
+    1.   `acquire()` log’s lock
+    2.   If log is **committing**, sleep
+    3.   If **concurrent operation amount** (`outstanding`) is over upper limit, sleep
+    4.   If not the above two cases, increase `outstanding`, `release()` lock and continue
+
 -   `log_write()`: update **log header in memory** including block number and block amount
 
 -   `end_op()`
 
-    1.   `write_log()`(write log): **write** block’s data from **buffer cache** to disk **log** according to log header in memory
+    1.   `acquire()` log’s lock
 
-         >   `bwrite()` will be used in `write_log()`, but should not be directly used without logging
+    2.   Decrease `outstanding`
 
-    2.   `write_head()`(commit op): write **log header** into disk log’s header block
+    3.   If this is the last outstanding operation (`outsanding == 0`), mark it, else `wakeup()` sleeping process in `begin_op()`
 
-         >   Inside `write_head()` is a `bwrite()` call which is the actual “**commit point**”
+    4.   `release()` log’s lock
 
-    3.   `install_trans()`(install)
+    5.   `commit()` if marked above
 
-    4.   Set log header `n`(amount) to 0 and `write_head()`(clean log)
+         1.   `write_log()`(write log): **write** block’s data from **buffer cache** to disk **log** according to log header in memory
+
+              >   `bwrite()` will be used in `write_log()`, but should not be directly used without logging
+
+         2.   `write_head()`(commit op): write **log header** into disk log’s header block
+
+              >   Inside `write_head()` is a `bwrite()` call which is the actual “**commit point**”
+
+         3.   `install_trans()`(install)
+
+         4.   Set log header `n`(amount) to 0 and `write_head()`(clean log)
 
 ---
 
