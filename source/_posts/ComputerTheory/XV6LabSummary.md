@@ -372,6 +372,63 @@ date: 2023-01-05 11:24:08
 
 #### 3 Logging Level
 
+***Crash** includes:*
+
+-   Power fault
+-   Core `panic()`
+
+>   Exclude disk fault like data missing
+
+---
+
+***Key** point:*
+
+-   The **atomicity** of multiple operation of **writing block**, not the **order**
+-   **Fast recovery**
+
+---
+
+***Thoughts** about logging:*
+
+1.   *Write log*: **write data to log** when requiring to write file system
+
+2.   *Commit op*: **Record numbers** representing a groups of file system **writing** when they totally finish and **store data in log**
+
+     >   Follow “**write ahead rule**”: before committing, all the written data must be in the log
+
+3.   *Install log*: **Move** log’s blocks’ data to file system’s blocks when really ready to execute these writing
+
+4.   *Clean log*: **Clean records** after installing log
+
+---
+
+***A Log’s Structure***:
+
+-   **Header block**: valid **log block amount** and **disk block number** each log block corresponding
+-   **Log’s data block**: actual blocks’ data to store in disk
+
+---
+
+***Implementation of Logging:***
+
+-   `begin_op()`
+
+-   `log_write()`: update **log header in memory** including block number and block amount
+
+-   `end_op()`
+
+    1.   `write_log()`(write log): **write** block’s data from **buffer cache** to disk **log** according to log header in memory
+
+         >   `bwrite()` will be used in `write_log()`, but should not be directly used without logging
+
+    2.   `write_head()`(commit op): write **log header** into disk log’s header block
+
+         >   Inside `write_head()` is a `bwrite()` call which is the actual “**commit point**”
+
+    3.   `install_trans()`(install)
+
+    4.   Set log header `n`(amount) to 0 and `write_head()`(clean log)
+
 #### 4 Inode Level
 
 *Inode Structure’s Fields:*
@@ -381,6 +438,8 @@ date: 2023-01-05 11:24:08
 -   `size`: file or directory data bytes
 -   12 Direct block numbers: direct index to data block
 -   1 Indirect block number: one level indirect indiex to data block
+
+---
 
 *Find nth byte in a file:*
 
@@ -397,6 +456,8 @@ date: 2023-01-05 11:24:08
     -   First 2 bytes: subdirectory’s or file’s **inode number**
     -   Next 14 bytes: subdirectory’s or file’s **name**
 
+---
+
 *Find a pathname:*
 
 1.   Begin with **`root ` inode** having index number 1 in XV6
@@ -404,12 +465,14 @@ date: 2023-01-05 11:24:08
 3.   Follow **index number** to find deeper level pathname in the data blocks
 4.   Repeat above steps until find the correct file or meet error
 
+---
+
 *Create a file and firstly write data into it:*
 
 1.   **Allocate an inode** and write `type`, `nlink` and other infomation in it
 2.   Find parent directory and **create a new entry** in its data block
 3.   Modify **parent directory’s inode**: *size* and so on
-4.   Scan `bitmap` to find an unused **data block** for new file and update `bitmap`
+4.   Scan `bitmap` to find an unused **data block** for new file to write and update `bitmap`
 5.   Modify **new file’s inode**: *size*, *direct block number* and so on
 
 #### 6 Pathname Level

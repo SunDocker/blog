@@ -34,3 +34,13 @@ swiper_index: 2
 
 -   Finish the **blog post** of *Database System*
 
+### Zhongxing Campus Ambassador
+
+<u>*Current Status:*</u>
+
+-   Just an idea
+
+<u>*Expected:*</u>
+
+-   Make a formal personal resume
+-   Send to Zhongxing email
