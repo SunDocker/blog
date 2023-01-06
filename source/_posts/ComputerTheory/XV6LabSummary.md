@@ -429,6 +429,15 @@ date: 2023-01-05 11:24:08
 
     4.   Set log header `n`(amount) to 0 and `write_head()`(clean log)
 
+---
+
+*File System **Recovering**:*
+
+>   `initlog() -> recover_from_log()`
+
+1.   `read_head()` to read **log header** from disk into memory
+2.   `install_trans()`
+
 #### 4 Inode Level
 
 *Inode Structure’s Fields:*
