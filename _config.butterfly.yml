@@ -5,7 +5,7 @@
 menu:
   Home Page: / || fas fa-home
 #  Categories: /categories/ || fas fa-folder-open
-  Categories || fas fa-folder-open:
+  Knowledge Repository || fa-solid fa-warehouse:
     Computer Theory: /categories/Computer-Theory || fa-solid fa-book
     Java & Kotlin: /categories/Java-Kotlin || fa-brands fa-java
     Data Persistence: /categories/Data-Persistence || fa-solid fa-database
@@ -16,6 +16,11 @@ menu:
     C & C++: /categories/C-C || fa-solid fa-c
     Big Data: /categories/Big-Data || fa-solid fa-mountain-sun
     AI: /categories/AI || fa-solid fa-robot
+  Life Sharing || fa-solid fa-sun:
+    Paper Reading: /categories/Life-Sharing || fa-solid fa-book-open
+    Pop Music Keyboard: /categories/Life-Sharing || fa-solid fa-music
+    Movie Review: /categories/Life-Sharing || fa-solid fa-film
+    Life By-talk: /categories/Life-Sharing || fa-solid fa-comment
   Links || fas fa-list:
     Knowledge Tree: /posts/6c24763b.html || fa-solid fa-folder-tree
     About This Blog: /posts/ed318fdc.html || fa-solid fa-blog

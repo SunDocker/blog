@@ -1,3 +1,4 @@
+/* fonts */
 @font-face {
     font-family: Candyhome;
     src: url(https://npm.elemecdn.com/anzhiyu-blog@1.1.6/fonts/Candyhome.ttf);
@@ -5,19 +6,31 @@
     font-weight: lighter;
 }
 
-/*@font-face {
+/*
+@font-face {
   font-family: 'ZhuZiAYuanJWD';
   src: url(https://npm.elemecdn.com/anzhiyu-blog@1.1.6/fonts/ZhuZiAWan.woff2);
   font-display: swap;
   font-weight: lighter;
-}*/
+}
+*/
 
-/*added by myself*/
 body {
-    font-family: 'Candyhome', serif;
+    font-family: 'Candyhome', 'Microsoft YaHei', sans-serif;
 }
 
-/*added by myself*/
+article#article-container {
+    font-family: 'Times New Roman', fangsong;
+    font-size: 125%; /* for times new roman */
+}
+
+div.toc-content {
+    font-family: 'Times New Roman', fangsong;
+    /*font-style: italic;*/
+    font-weight: bold;
+    font-size: 105%; /* for times new roman */
+}
+
 
 /*div#menus {
   font-family: 'Candyhome';
@@ -409,6 +422,7 @@ button:not(:disabled) span {
 .toc-content {
     font-size: 95%;
 }
+
 /* post toc */
 
 /* snackbar text center */
@@ -458,13 +472,15 @@ main.layout#content-inner {
     width: 100%;
     margin: auto;
 }
+
 span.space {
     color: #00c4b6;
 }
+
 /* pagination */
 
 /* hexo-butterfly-article-double-row */
-div#recent-posts>.recent-post-item>.recent-post-info>.content {
+div#recent-posts > .recent-post-item > .recent-post-info > .content {
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -473,10 +489,12 @@ div#recent-posts>.recent-post-item>.recent-post-info>.content {
     margin-bottom: 15px;
     font-size: 85%;
 }
-#recent-posts > .recent-post-item >.recent-post-info {
+
+#recent-posts > .recent-post-item > .recent-post-info {
     text-align: center;
 }
-div#recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap {
+
+div#recent-posts > .recent-post-item > .recent-post-info > .article-meta-wrap {
     margin-bottom: 0;
     font-size: 70%;
 }
@@ -494,4 +512,9 @@ div.blog-slider {
 /* aside card */
 div#aside-content .card-info .card-info-data {
     display: none;
+}
+
+/* post */
+#post {
+    padding: 30px 50px;
 }
