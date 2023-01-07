@@ -34,13 +34,63 @@ swiper_index: 2
 
 -   Finish the **blog post** of *Database System*
 
+### Delta Compression
+
+<u>*Current Status:*</u>
+
+-   Just learn mentor’s instruction
+
+*<u>Expected Outcomes:</u>*
+
+-   Summarize **papers** about CDC, delta compression to blog post
+-   Summarize **delta compression and zstd compression** to blog post
+
 ### Zhongxing Campus Ambassador
 
 <u>*Current Status:*</u>
 
 -   Just an idea
 
-<u>*Expected:*</u>
+---
+
+<u>*Expected Outcomes:*</u>
 
 -   Make a formal personal resume
 -   Send to Zhongxing email
+
+### Blog Building
+
+<u>*Current Status:*</u>
+
+-   Finish knowledge tree structure
+
+---
+
+<u>*Expected Outcomes:*</u>
+
+-   Complete life sharing category, including pop music keyboard and paper reading
+
+### MCM Preparation
+
+<u>*Current Status:*</u>
+
+-   Planning
+
+---
+
+<u>*Expected Outcomes:*</u>
+
+-   Finish the plan for the next month
+
+### CSCC OS Preparation & XV6 Learning
+
+<u>*Current Status:*</u>
+
+-   Finish lectures about xv6 except syscall, page table and lock
+
+---
+
+<u>*Expected Outcomes:*</u>
+
+-   Begin to make plan after college’s guidance
+-   Finish all lectures about xv6

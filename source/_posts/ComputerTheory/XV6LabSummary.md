@@ -137,8 +137,8 @@ date: 2023-01-05 11:24:08
 
 -   When to call `fn`: 
 
-    -   n ticks, so we need a new filed in process structrue
-    -   Prevent re-entrant calls to the handler by adding a new field in process structure to sign if a handler is running
+    -   **n ticks**, so we need a new filed in process structrue
+        -   Prevent **re-entrant** calls to the handler by adding a new field in process structure to sign if a handler is running
 
 -   How to call `fn`:
 
@@ -605,8 +605,8 @@ date: 2023-01-05 11:24:08
 
 >   Just follow thought in basic theory with the help of hints in guide book
 
-1.   ***Lazy***
-2.   ***Allocate***: Besides basic theory above: (in `sys_mmap()`)
+1.   ***Lazy*** (in `sys_mmap()`)
+2.   ***Allocate***: Besides basic theory above: (in `mmap_alloc()`)
      -   It is also required to handle **permissions** about file
      -   Use **inode** to read file (`readi()`)
 3.   ***Release***: (in `sys_munmap()`)
@@ -614,7 +614,7 @@ date: 2023-01-05 11:24:08
      -   Call `uvmunmap()` to unmap the file’s part in memory
      -   Call `fileclose()` if unmap all the file in memory
      -   Also delete unnecessary `panic()` in `uvmcopy()` and `uvmunmap()`
-     -   ***Kernel***:
+4.   ***Kernel***:
      -   `exit()`
      -   `fork() `
 
