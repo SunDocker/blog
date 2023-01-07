@@ -174,28 +174,32 @@ date: 2023-01-05 11:24:08
 
 -   Simple **implementation** of **lazy page allocation**:
 
-    -   Modify `sbrk()` by plan
+    -   ***Lazy***: Modify `sbrk()` by plan
 
-    -   Handle a more trap case **page fault** in `usertrap()`, to `kalloc()` a **new page** and `mappages()` a **new map** in lazy allocation
+    -   ***Allocate***: Handle a more trap case **page fault** in `usertrap()`, to `kalloc()` a **new page** and `mappages()` a **new map** in lazy allocation
 
-    -   Delete `panic()`  in `uvmunmap()` when **unmapping lazy allocation page** not actually used
+    -   ***Release***: Delete `panic()`  in `uvmunmap()` when **unmapping lazy allocation page** not actually used
 
         >   XV6 `panic()` when this case happens, but actually this case **never happens** in unmodified XV6, and we require no `panic()` on this case in lazy allocation
 
 ### Task Analysis
 
+>   Just follow thought and implementation in basic theory
+
 #### Task 1: Eliminate allocation from sbrk()
 
--   Just follow thought and implementation in basic theory
+1.   ***Lazy***
 
 #### Task 2: Lazy allocation
 
--   Just follow thought and implementation in basic theory
+2.   ***Allocate***
 
 #### Task 3: Lazytests and Usertests
 
--   Just follow key points listed in guide book
-    -   When user process use lazy allocated virtual address, page fault causes trap. But when **syscall use user space’s lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `argaddr()` or `walkaddr()`
+>   Just follow key points listed in guide book
+
+3.   ***Release***
+4.   ***Kernel***: When user process use lazy allocated virtual address, page fault causes trap. But when **syscall use user space’s lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `argaddr()` or `walkaddr()`
 
 
 
@@ -205,13 +209,13 @@ date: 2023-01-05 11:24:08
 
 -   **Thoughts** about **COW fork**:
 
-    -   **Just copy page table maps** of parent process but do not copy pages when creating child process, and set these maps **read-only**
+    -   ***Lazy:*** **Just copy page table maps** of parent process but do not copy pages when creating child process, and set these maps **read-only**
 
-    -   Lazily copy pages when parent or child process **write these pages causing page faults**, and execute page fault instructions again
+    -   ***Allocate:*** Lazily copy pages when parent or child process **write these pages causing page faults**, and execute page fault instructions again
 
         >   For recognizing this case, we need use **a new sign bit in PTE**, or we may not distinguish this case from writing **an originally read-only page**
 
-    -   Be careful to decide whether to **release a page** when parent process exits, for child process maybe using it
+    -   ***Release:*** Be careful to decide whether to **release a page** when parent process exits, for child process maybe using it
 
         >   We can set **a reference counter** for these pages
 
@@ -219,8 +223,12 @@ date: 2023-01-05 11:24:08
 
 #### Task 1: Implement copy-on write
 
--   Just follow thought in basic theory
--   When user process *write* lazy allocated virtual address, page fault causes trap. But when **kernel process *<u>write</u>* user space’s lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `copyout()`
+>   Just follow thought in basic theory with the help of hints in guide book
+
+1.   ***Lazy***
+2.   ***Allocate***
+3.   ***Release***
+4.   ***Kernel***: When user process *write* lazy allocated virtual address, page fault causes trap. But when **kernel process *<u>write</u>* user space’s lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `copyout()`
 
 
 
@@ -264,7 +272,7 @@ date: 2023-01-05 11:24:08
     -   Bottom part: **interrupt handler**
     -   Top part: **interfaces** for user or kernel process
 
-#### Multithreading
+#### Multithreading & Timer Interrupt
 
 -   Three parts of thread’s status to keep when switching
     -   **Program counter**
@@ -293,7 +301,7 @@ date: 2023-01-05 11:24:08
 
               1.   Store kernel process’s **registers** into a `context`
 
-                   >   `context` is stored in corresponding **user process structure**
+                   >   `context` is stored in corresponding **user process structure**;
          
               2.   Convert to this **CPU’s scheduler process** by restoring its `context` thus jumping to `swtch()` called before
 
@@ -303,8 +311,11 @@ date: 2023-01-05 11:24:08
 
               3.   Continue executing `scheduler()`
          
+         
+              >   `swtch` needs to save/restore only the **callee-save registers** because it is called as a **C function** thus **caller-save registers** saved automatically
+         
          4.   `scheduler()` switch another `RUNNABLE` process to `RUNNING`
-
+         
               1.   Release process’s **lock**
               2.   Find another `RUNNABLE` process
               3.   Call `swtch`
@@ -314,18 +325,35 @@ date: 2023-01-05 11:24:08
               1.   Store this **CPU’s scheduler process** `context`
               2.   **Restore** another kernel process’s `context` thus jumping to `swtch()` called before
               3.   Another kernel finish **timer interrupt** and return to **user space**
-
+    
     >   Other interrupts causing **thread waiting** are similar to timer interrupt
 
 ### Task Analysis
 
 #### Task 1: Uthread: switching between threads
 
+-   Complete **thread structure**: add `context`
+
+-   Complete `thread_create()`:
+
+    -   Set `context.ra` to execute the function passed
+    -   Set `contest.sp` to execute on its own stack
+
+    when `thread_schedule()` runs a given thread for the first time
+
+-   Complete `thread_schedule()`: add calling `thread_swtich`
+
+-   Complete `thread_switch`: simulate `swtch`
+
 #### Task 2: Using threads
+
+-   Definition and Initialization of lock
+-   Use of lock
 
 #### Task 3: Barrier
 
-
+-   Definition and Initialization of lock
+-   Use of lock
 
 ## Lab 8: locks
 
@@ -540,9 +568,24 @@ date: 2023-01-05 11:24:08
 
 #### Task1: Large files
 
+-   Modify the **index address layout** and inode structure in fs.h and file.h
+-   Modify the **index address map method** in `bmap()`
+    -   Simulate singly-indirect block map in `bmap()`
+    -   `bread()` and `brelse()` an index block
+    -   Call `balloc()` if index or data block is not allocated
+    -   Call `log_write()` if index block is modified
+    -   Comprehend the arithmetical operation of `bn`
+-   Modify the **data and index block releasing method** in `itrunc()`
+    -   Simulate singly-indirect block free in `itrunc()`
+
 #### Task2: Symbolic links
 
-
+-   **Create** symbolic link in `sys_symlink()`
+    -   `create()` with type `T_SYMLINK` and name `path`
+    -   `writei()` `target` to inode’s data block
+-   **Use** symbolic link in `sys_open()`
+    -   Add codes **after getting inode**
+    -   Follow the symbolic link to update inode, if the type is `T_SYMLINK` and `O_NOFOLLOW` is not flagged
 
 ## Lab10: mmap
 
@@ -553,9 +596,25 @@ date: 2023-01-05 11:24:08
     -   Copy the whole file to memory by **offset and length**, allocating pages
     -   **Unmap and write back dirty block** after finishing handling the file
 -   Thoughts about **lazy mmap**: 
-    -   Just **match PTE with VMA** (Virtual Memory Area) which contains information about file but do not allocating pages
-    -   Lazily allocate pages when actually reading or writing mmap file causing **page fault**
+    -   ***Lazy:*** Just **store VMA** (Virtual Memory Area) which contains information about file in process structure but do not allocate pages
+    -   ***Allocate:*** Lazily allocate pages when actually reading or writing mmap file causing **page fault**
 
 ### Task Analysis
 
 #### Task1: mmap
+
+>   Just follow thought in basic theory with the help of hints in guide book
+
+1.   ***Lazy***
+2.   ***Allocate***: Besides basic theory above: (in `sys_mmap()`)
+     -   It is also required to handle **permissions** about file
+     -   Use **inode** to read file (`readi()`)
+3.   ***Release***: (in `sys_munmap()`)
+     -   Call `filewrite()` if `MAP_SHADED`
+     -   Call `uvmunmap()` to unmap the file’s part in memory
+     -   Call `fileclose()` if unmap all the file in memory
+     -   Also delete unnecessary `panic()` in `uvmcopy()` and `uvmunmap()`
+     -   ***Kernel***:
+     -   `exit()`
+     -   `fork() `
+
