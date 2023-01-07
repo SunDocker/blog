@@ -124,6 +124,8 @@ date: 2023-01-05 11:24:08
 
 #### Task 1: RISC-V assembly
 
+-   `jalr` omit first parameter for it is the same as register in second parameter
+
 #### Task 2: Backtrace
 
 -   Comprehend function call stack’s structure, especially `fp` and `pre fp`, to correctly **back track** function call stack
@@ -168,6 +170,8 @@ date: 2023-01-05 11:24:08
 
     -   Lazily allocate pages when **page faults with virtual address between** `p->sz` before and after `sbrk()` occurs, and execute page fault instructions again
 
+        >   To execute page fault again, we just keep the value in **sepc**, because it keeps **the instruction address cause page fault**. (For syscall, value in sepc will be **increased** to execute next instruction instead of `ecall` after syscal)
+
 -   Simple **implementation** of **lazy page allocation**:
 
     -   Modify `sbrk()` by plan
@@ -191,7 +195,7 @@ date: 2023-01-05 11:24:08
 #### Task 3: Lazytests and Usertests
 
 -   Just follow key points listed in guide book
-    -   When user process use lazy allocated virtual address, page fault causes trap. But when **syscall use lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `argaddr()` or `walkaddr()`
+    -   When user process use lazy allocated virtual address, page fault causes trap. But when **syscall use user space’s lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `argaddr()` or `walkaddr()`
 
 
 
@@ -214,6 +218,9 @@ date: 2023-01-05 11:24:08
 ### Task Analysis
 
 #### Task 1: Implement copy-on write
+
+-   Just follow thought in basic theory
+-   When user process *write* lazy allocated virtual address, page fault causes trap. But when **kernel process *<u>write</u>* user space’s lazy allocated virtual address** (already in trap but not caused by page fault) , we need to handle it in `copyout()`
 
 
 
