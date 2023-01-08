@@ -95,3 +95,16 @@ swiper_index: 2
 
 -   Begin to make plan after college’s guidance
 -   Finish all lectures about xv6
+
+### Lanqiao Cup & Leetcode & Data Structure :date: 1.16
+
+<u>*Current Status:*</u>
+
+-   Finish the post **framework**
+
+---
+
+<u>*Expected Outcomes:*</u>
+
+-   Summarize and trim basic theory about **linear list**
+-   Finish exercises about **linear list**
