@@ -10,31 +10,32 @@ sticky: 2
 swiper_index: 2
 ---
 
-### Operation System Reviewing
+### Operation System Reviewing :date: 1.15
 
 <u>*Current Status:*</u>
 
--   Have finished 
+-   Have finished **2.1**and previous **objective exercises** in *Wang Dao*
 
 <u>*Expected Outcomes:*</u>
 
--   Finish all **exercises** in *Wang Dao*
+-   Finish all **objective exercises** in *Wang Dao*
 -   Complement the **blog post** while doing exercises
 
-### Database System Learning
+### Database System Learning :date: 1.12
 
 <u>*Current Status:*</u>
 
--   Learn **MOOC(second) lecture 1**
+-   Learning **MOOC(third) lecture 1**
 -   Have written *Three Worlds With Levels of Abstraction* in the **blog post**
 
 ---
 
 <u>*Expected Outcomes:*</u>
 
+-   Finish **MOOC(third)**
 -   Finish the **blog post** of *Database System*
 
-### Delta Compression
+### Delta Compression :date: 1.15
 
 <u>*Current Status:*</u>
 
@@ -45,18 +46,18 @@ swiper_index: 2
 -   Summarize **papers** about CDC, delta compression to blog post
 -   Summarize **delta compression and zstd compression** to blog post
 
-### Zhongxing Campus Ambassador
+### Zhongxing Campus Ambassador  :date: 1.11
 
 <u>*Current Status:*</u>
 
--   Just an idea
+-   Build the framework of resume
 
 ---
 
 <u>*Expected Outcomes:*</u>
 
--   Make a formal personal resume
--   Send to Zhongxing email
+-   Fill the **details** of resume
+-   **Send** to Zhongxing email
 
 ### Blog Building
 
@@ -70,7 +71,7 @@ swiper_index: 2
 
 -   Complete life sharing category, including pop music keyboard and paper reading
 
-### MCM Preparation
+### MCM Preparation :date: 1.10
 
 <u>*Current Status:*</u>
 
