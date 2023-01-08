@@ -14,7 +14,8 @@ swiper_index: 2
 
 <u>*Current Status:*</u>
 
--   Have finished **2.1**and previous **objective exercises** in *Wang Dao*
+-   Have finished **2.1** and previous **objective exercises** in *Wang Dao*
+-   Doing 2.2 objective e
 
 <u>*Expected Outcomes:*</u>
 
