@@ -8,7 +8,7 @@ tags:
 category: Computer Theory
 ---
 
-# 模型与语言
+# Model & Language
 
 ## 1 数据库系统概述
 
@@ -783,11 +783,11 @@ category: Computer Theory
 >
 >   
 
-# 建模与设计
+# Modeling & Design
 
-## 1 Data Modeling
+## 4 Data Modeling
 
-### 1.1 Three Worlds With Levels of Abstraction
+### 4.1 Three Worlds With Levels of Abstraction
 
 #### *Real world:*
 
@@ -846,7 +846,7 @@ category: Computer Theory
 >   -   Model and meta model
 
 
-### 1.2 Entity-Relationship Model
+### 4.2 Entity-Relationship Model
 
 #### *Overview / Conceptual Framework:*
 
@@ -864,7 +864,7 @@ category: Computer Theory
 
 
 
-### 1.3 IDEF1x
+### 4.3 IDEF1x
 
 #### *Overview / Conceptual Framework:*
 
@@ -894,9 +894,9 @@ category: Computer Theory
 
 
 
-## 2 Database Design
+## 5 Database Design
 
-### 2.1 Process of Database Design
+### 5.1 Process of Database Design
 
 #### *Demand Analysis：*
 
@@ -926,10 +926,34 @@ category: Computer Theory
 
 
 
-### 2.2 Function Dependency with Its Axiom and Theorem
+### 5.2 Function Dependency With its Axiom and Theorem
 
 
 
 
 
-# 管理与技术
+# Management & Technology
+
+## 6 Physical Storage & Index
+
+### 6.1 Physical Storage
+
+#### *Framework of Data Storage and Query:*
+
+
+
+#### *Map Between Records and Blocks:*
+
+
+
+#### *File Organization:*
+
+### 6.2 Index
+
+
+
+## 7 Query Algorithm
+
+
+
+## 8 Transaction Processing
