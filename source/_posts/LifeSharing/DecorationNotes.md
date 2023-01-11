@@ -6,28 +6,27 @@ category: Life Sharing
 tags:
     - Life Sharing
 ---
-
->   Note down all the modification based on *butterfly theme*
+> Note down all the modification based on *butterfly theme*
 
 ### Site Basic Info
 
 _config.yml:
 
--   `title`
--   `subtitle`
--   `description`
--   `keywords`
--   `author`
--   `language`
--   `timezone`
--   `deploy`
-    -   `type`
-    -   `repo`
-        -   `github`
-        -   `gitee`
-    -   `branch`
+- `title`
+- `subtitle`
+- `description`
+- `keywords`
+- `author`
+- `language`
+- `timezone`
+- `deploy`
+  - `type`
+  - `repo`
+    - `github`
+    - `gitee`
+  - `branch`
 
->   Just delete *.deploy_git* folder when meeting deployment errors
+> Just delete *.deploy_git* folder when meeting deployment errors
 
 ### hexo-abbrlink
 
@@ -37,10 +36,10 @@ npm install hexo-abbrlink --save
 
 _config.yml:
 
--   `permalink`
--   `abbrlink`
-    -   `alg`
-    -   `rep`
+- `permalink`
+- `abbrlink`
+  - `alg`
+  - `rep`
 
 ### hexo-generator-search
 
@@ -50,17 +49,17 @@ npm install hexo-generator-search --save
 
 _config.yml:
 
--   `search`
-    -   `path`
-    -   `field`
-    -   `content`
-    -   `format`
-    -   `limit`
+- `search`
+  - `path`
+  - `field`
+  - `content`
+  - `format`
+  - `limit`
 
 _config.butterfly.yml
 
--   `local_search`
-    -   `enable`
+- `local_search`
+  - `enable`
 
 ### hexo-baidu-url-submit
 
@@ -70,13 +69,13 @@ npm install hexo-baidu-url-submit --save
 
 _config.yml:
 
--   `deploy`
-    -   `type`
--   `baidu_url_submit`
-    -   `const`
-    -   `host`
-    -   `token`
-    -   `path`
+- `deploy`
+  - `type`
+- `baidu_url_submit`
+  - `const`
+  - `host`
+  - `token`
+  - `path`
 
 ### hexo-helper-live2d
 
@@ -87,20 +86,20 @@ npm install --save live2d-widget-model-koharu
 
 _config.yml:
 
--   `live2d`
-    -   `enable`
-    -   `scriptForm`
-    -   `tagMode`
-    -   `debug`
-    -   `model`
-        -   `use`
-    -   `display`
-        -   `position`
-        -   `width`
-        -   `height`
-        -   `hOffset`
-    -   `mobile`
-        -   `show`
+- `live2d`
+  - `enable`
+  - `scriptForm`
+  - `tagMode`
+  - `debug`
+  - `model`
+    - `use`
+  - `display`
+    - `position`
+    - `width`
+    - `height`
+    - `hOffset`
+  - `mobile`
+    - `show`
 
 ### SEO
 
@@ -112,22 +111,24 @@ npm install hexo-generator-feed --save
 
 _config.yml:
 
--   `url`
--   `sitemap`
-    -   `path`
+- `url`
+- `sitemap`
 
--   `baidusitemap`
-    -   `path`
--   `feed`
-    -   `type`
-    -   `path`
-    -   `limit`
--   `rss`
--   `plugins`
+  - `path`
+- `baidusitemap`
+
+  - `path`
+- `feed`
+
+  - `type`
+  - `path`
+  - `limit`
+- `rss`
+- `plugins`
 
 _config.butterfly.yml:
 
--   `site_verification`
+- `site_verification`
 
 ### hexo-bilibili-bangumi
 
@@ -137,42 +138,42 @@ npm install hexo-bilibili-bangumi --save
 
 _config.yml
 
--   `bangumi`
-    -   `enable`
-    -   `path`
-    -   `vmid`
-    -   `title`
-    -   `quote`
-    -   `show`
-    -   `lazyload`
-    -   `loading`
-    -   `metaColor`
-    -   `color`
-    -   `webp`
-    -   `progress`
-    -   `extra_options`
-        -   `key`
--   `cinema`
-    -   `enable`
-    -   `path`
-    -   `vmid`
-    -   `title`
-    -   `quote`
-    -   `show`
-    -   `lazyload`
-    -   `loading`
-    -   `metaColor`
-    -   `color`
-    -   `webp`
-    -   `progress`
-    -   `extra_options`
-        -   `key`
+- `bangumi`
+  - `enable`
+  - `path`
+  - `vmid`
+  - `title`
+  - `quote`
+  - `show`
+  - `lazyload`
+  - `loading`
+  - `metaColor`
+  - `color`
+  - `webp`
+  - `progress`
+  - `extra_options`
+    - `key`
+- `cinema`
+  - `enable`
+  - `path`
+  - `vmid`
+  - `title`
+  - `quote`
+  - `show`
+  - `lazyload`
+  - `loading`
+  - `metaColor`
+  - `color`
+  - `webp`
+  - `progress`
+  - `extra_options`
+    - `key`
 
 _config.butterfly.yml
 
--   `lazyload`
-    -   `enable`
--   `menu`
+- `lazyload`
+  - `enable`
+- `menu`
 
 ### hexo-tag-aplayer
 
@@ -182,18 +183,18 @@ npm install hexo-tag-aplayer --save
 
 _config.yml
 
--   `aplayer`
-    -   `meting`
-    -   `asset_inject`
+- `aplayer`
+  - `meting`
+  - `asset_inject`
 
 _config.butterfly.yml
 
--   `aplayerInject`
-    -   `enable`
-    -   `per_page`
--   `inject`
-    -   `bottom`
-        -   `<div class="aplayer" ..></div>`
+- `aplayerInject`
+  - `enable`
+  - `per_page`
+- `inject`
+  - `bottom`
+    - `<div class="aplayer" ..></div>`
 
 ### Gulp Compressing
 
@@ -221,7 +222,7 @@ npm uninstall --save-dev gulp-imagemin
 
 package.json:
 
--   `type`
+- `type`
 
 gulpfile.js
 
@@ -231,7 +232,7 @@ themes\butterfly\layout\includes\third-party\pwanotice.pug
 
 themes\butterfly\layout\includes\additional-js.pug:
 
--   `theme.pwa.enable`
+- `theme.pwa.enable`
 
 source\img\\*
 
@@ -239,21 +240,21 @@ source\pwa\\*
 
 _config.butterfly.yml:
 
--   `pwa`
-    -   `enable`
-    -   `manifest`
-    -   `apple_touch_icon`
-    -   `favicon_32_32`
-    -   `favicon_16_16`
-    -   `mask_icon`
-    -   `theme_color`
+- `pwa`
+  - `enable`
+  - `manifest`
+  - `apple_touch_icon`
+  - `favicon_32_32`
+  - `favicon_16_16`
+  - `mask_icon`
+  - `theme_color`
 
 ### Background
 
 _config.butterfly.yml:
 
--   `background`
--   `footer_bg`
+- `background`
+- `footer_bg`
 
 ### custom.css
 
@@ -261,11 +262,11 @@ source\css\custom.css
 
 _config.butterfly.yml:
 
--   `inject`
-    -   `head`
--   `background`
+- `inject`
+  - `head`
+- `background`
 
->   Just use **CSS Selector** in *custom.css* if willing to modify some components
+> Just use **CSS Selector** in *custom.css* if willing to modify some components
 
 ### Electric Clock
 
@@ -278,7 +279,7 @@ npm install hexo-butterfly-clock-anzhiyu --save
 
 _config.butterfly.yml:
 
--   `electric_clock`
+- `electric_clock`
 
 ### Tags page
 
@@ -310,8 +311,8 @@ source\\_data\link.yml
 
 _config.butterfly.yml:
 
--   `error_404`
-    -   `enable`
+- `error_404`
+  - `enable`
 
 ### Navigation menu
 
@@ -319,12 +320,12 @@ https://fontawesome.com/icons?from=io
 
 _config.butterfly.yml:
 
--   `menu`
-    -   `Home`
-    -   `Categories`
-    -   `Tags`
-    -   `Archives`
-    -   `Links`
+- `menu`
+  - `Home`
+  - `Categories`
+  - `Tags`
+  - `Archives`
+  - `Links`
 
 ### hide_sidebar_menu_child
 
@@ -332,11 +333,11 @@ _config.butterfly.yml:
 
 _config.butterfly.yml:
 
--   `highlight_theme`
--   `highlight_copy`
--   `highlight_lang`
--   `highlight_shrink`
--   `highlight_height_limit`
+- `highlight_theme`
+- `highlight_copy`
+- `highlight_lang`
+- `highlight_shrink`
+- `highlight_height_limit`
 
 ### Social Contact Icon
 
@@ -344,114 +345,119 @@ https://fontawesome.com/icons?from=io
 
 _config.butterfly.yml:
 
--   `social`
-    -   `fab fa-github`
-    -   `fas fa-envelope`
-    -   `fa-solid fa-blog`
+- `social`
+  - `fab fa-github`
+  - `fas fa-envelope`
+  - `fa-solid fa-blog`
 
-### Article Introduction on Homepage
+### Articles on Homepage
 
 `index_post_content`
 
--   `method`
+- `method`
+
+`index_generator`
+
+-   `per_page`
+-   `order_by`
 
 ### Top Image
 
 _config.butterfly.yml:
 
--   `disable_top_img`
--   `index_img`
--   `default_top_img`
+- `disable_top_img`
+- `index_img`
+- `default_top_img`
 
 ### Avatar
 
 _config.butterfly.yml:
 
--   `avatar`
-    -   `img`
-    -   `effect`
+- `avatar`
+  - `img`
+  - `effect`
 
 ### Article Cover
 
 _config.butterfly.yml:
 
--   `cover`
-    -   `position`
-    -   `default_cover`
+- `cover`
+  - `position`
+  - `default_cover`
 
 ### Article Meta
 
 _config.butterfly.yml:
 
--   `post_meta`
-    -   `page`
-        -   `date_format`
-    -   `post`
-        -   `date_format`
+- `post_meta`
+  - `page`
+    - `date_format`
+  - `post`
+    - `date_format`
 
 ### Article Copyright
 
 _config.butterfly.yml:
 
--   `post_copyright`
-    -   `author_href`
+- `post_copyright`
+  - `author_href`
 
 ### Article Reward
 
 _config.butterfly.yml:
 
--   `reward`
-    -   `enable`
-    -   `QR_code`
+- `reward`
+  - `enable`
+  - `QR_code`
 
 ### Article Catalogue
 
 _config.butterfly.yml:
 
--   `toc`
-    -   `number`
-    -   `style_simple`
+- `toc`
+  - `number`
+  - `style_simple`
 
 ### Related Article
 
 _config.butterfly.yml:
 
--   `related_post`
-    -   `date_type`
+- `related_post`
+  - `date_type`
 
 ### Article Anchor
 
 _config.butterfly.yml:
 
--   `anchor`
+- `anchor`
 
 ### Outdated Article Notice
 
 _config.butterfly.yml:
 
--   `noticeOutdate`
+- `noticeOutdate`
 
 ### Article Edit
 
 _config.butterfly.yml:
 
--   `post_edit`
-    -   `enable`
+- `post_edit`
+  - `enable`
 
 ### Image Description
 
 _config.butterfly.yml:
 
--   `photofigcaption`
+- `photofigcaption`
 
 ### About Copying
 
 _config.butterfly.yml:
 
--   `copy`
-    -   `copyright`
-        -   `enable`
-        -   `limit_count`
+- `copy`
+  - `copyright`
+    - `enable`
+    - `limit_count`
 
 ### Footer
 
@@ -461,34 +467,34 @@ npm install hexo-butterfly-footer-beautify --save
 
 _config.butterfly.yml:
 
--   `footer`
-    -   `owner`
-        -   `since`
-    -   `custom_text`
-    -   `copyright`
--   `footer_beautify`
+- `footer`
+  - `owner`
+    - `since`
+  - `custom_text`
+  - `copyright`
+- `footer_beautify`
 
 ### Bottom Right Button
 
 _config.butterfly.yml:
 
--   `translate`
-    -   `enable`
--   `darkmode`
-    -   `autoChangeMode`
+- `translate`
+  - `enable`
+- `darkmode`
+  - `autoChangeMode`
 
 ### Sidebar
 
 _config.butterfly.yml:
 
--   `aside`
-    -   `position`
-    -   `display`
-    -   `card_author`
-    -   `card_announcement`
-    -   `card_categories`
-    -   `card_tags`
-    -   `card_archives`
+- `aside`
+  - `position`
+  - `display`
+  - `card_author`
+  - `card_announcement`
+  - `card_categories`
+  - `card_tags`
+  - `card_archives`
 
 ### Markdown Math Formula
 
@@ -502,57 +508,57 @@ npm install @neilsustc/markdown-it-katex --save #需要安装这个katex插件
 
 _config.butterfly.yml:
 
--   `mathjax`
--   `katex`
+- `mathjax`
+- `katex`
 
 _config.yml
 
--   `markdown`
-    -   `plugins`
+- `markdown`
+  - `plugins`
 
 ### Background Effects
 
 _config.butterfly.yml:
 
--   `Background effects`
+- `Background effects`
 
 ### Mouse click effects
 
 _config.butterfly.yml:
 
--   `Background effects`
-    -   `enable`
+- `Background effects`
+  - `enable`
 
 ### Title Beautifying
 
 _config.butterfly.yml:
 
--   `beautify`
-    -   `field`
+- `beautify`
+  - `field`
 
 ### Font
 
 _config.butterfy.yml:
 
--   `font`
-    -   `global-font-size`
-    -   `font-family`
-    -   `code-font-family`
+- `font`
+  - `global-font-size`
+  - `font-family`
+  - `code-font-family`
 
 ### Website Subtitle
 
 _config.butterfy.yml:
 
--   `subtitle`
-    -   `enable`
-    -   `source`
-    -   `sub`
+- `subtitle`
+  - `enable`
+  - `source`
+  - `sub`
 
 ### Loading Animation
 
 _config.butterfy.yml:
 
--   `preloader`
+- `preloader`
 
 ### Word Count
 
@@ -562,27 +568,27 @@ npm install hexo-wordcount --save
 
 _config.butterfy.yml:
 
--   `wordcount`
+- `wordcount`
 
 ### Prefetch
 
 _config.butterfy.yml:
 
--   `instantpage`
+- `instantpage`
 
 ### Space Between Chinese Character and English Character
 
 _config.butterfy.yml:
 
--   `pangu`
-    -   `enable`
+- `pangu`
+  - `enable`
 
 ### Pjax
 
 _config.butterfy.yml:
 
--   `pjax`
-    -   `enable`
+- `pjax`
+  - `enable`
 
 ### hexo-butterfly-swiper
 
@@ -596,14 +602,14 @@ npm install hexo-butterfly-swiper --save
 
 _config.butterfy.yml:
 
--   `swiper`
-    -   `custom_css`
--   `pjax`
-    -   `enable`
+- `swiper`
+  - `custom_css`
+- `pjax`
+  - `enable`
 
 post toc:
 
--   `swiper_index`: 1-15 
+- `swiper_index`: 1-15
 
 ### Double Row
 
@@ -613,6 +619,46 @@ npm i hexo-butterfly-article-double-row --save
 
 _config.yml:
 
--   `butterfly_article_double_row`
--   `per_page`
+- `butterfly_article_double_row`
+- `per_page`
 
+### Category Card
+
+```
+npm install hexo-butterfly-categories-card --save
+```
+
+_config.butterfly.yml:
+
+-   categoryBar
+
+hexo-butterfly-categories-card/index.js:
+
+```js
+// 获取所有分类
+var categories_list= hexo.locals.get('categories').data;
+var categories_select = config.select; // added
+var categories_message= config.message;
+//声明一个空数组用来存放合并后的对象
+var new_categories_list = [];
+// 合并分类属性和新添加的封面描述属性
+for(var i=0;i<categories_list.length;i++){ // modified
+    var a = categories_list[i]
+    let idx; // added
+    if ((idx = categories_select.indexOf(a.name)) === -1) continue; // modified
+    var b = categories_message[idx]; // modified
+    new_categories_list[idx] = Object.assign(a,b) // modified
+}
+
+```
+
+custom.css
+
+### Category page
+
+layout/category.pug:
+
+-   `article.source.splie('/')[1]`
+-   `page.category.replace(/\s*/g, ''))`
+
+layout/includes/mixins/article-sort.pug:

@@ -778,7 +778,7 @@ aside:
               ~~o(>_<)o~~
               </div>"
   card_categories:
-    enable: true
+    enable: false
     limit: 0 # if set 0 will show all
     expand: none # none/true/false
     sort_order: # Don't modify the setting unless you know how it works
@@ -1096,3 +1096,47 @@ swiper:
   swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js #swiper js依赖
   custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css # 适配主题样式补丁
   custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js # swiper初始化方法
+
+# hexo-butterfly-categories-card
+# see https://akilar.top/posts/a9131002/
+categoryBar:
+  enable: true # 开关
+  priority: 5 #过滤器优先权
+  enable_page: / # 应用页面
+  layout: # 挂载容器类型
+    type: id
+    name: recent-posts
+    index: 1
+  column: odd # odd：3列 | even：4列
+  row: 2 #显示行数，默认两行，超过行数切换为滚动显示
+  select:
+    - Computer Theory
+    - Java & Kotlin
+    - Data Persistence
+    - Frontend
+    - Golang
+    - Operations
+    - Project Management
+  message:
+    - descr: OS, DB, Network, ...
+#      cover: https://npm.elemecdn.com/akilar-candyassets/image/cover1.webp
+      cover: /bgs/bg2.jpg
+    - descr: JavaEE, Spring, ...
+#      cover: https://npm.elemecdn.com/akilar-candyassets/image/cover2.webp
+      cover: /bgs/bg7.jpeg
+    - descr: MySQL, Redis, ...
+#      cover: https://npm.elemecdn.com/akilar-candyassets/image/cover3.webp
+      cover: /bgs/bg1.jpg
+    - descr: HTML, JS, Vue, ...
+#      cover: https://npm.elemecdn.com/akilar-candyassets/image/cover4.webp
+      cover: /bgs/bg11.jpg
+    - descr: Go, Gin, gRPC, ...
+#      cover: https://npm.elemecdn.com/akilar-candyassets/image/cover5.webp
+      cover: /bgs/bg13.jpg
+    - descr: Linux, Docker, ...
+#      cover: https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp
+      cover: /bgs/bg10.jpg
+    - descr: Git, Maven, Gradle, ...
+      cover: /bgs/bg14.jpg
+#  custom_css: https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css
+  custom_css: /css/categorybar.css

@@ -10,5 +10,6 @@ block content
     include ./includes/mixins/article-sort.pug
     #category
       .article-sort-title= _p('page.category') + ' - ' + page.category
-      +articleSort(page.posts)
-      include includes/pagination.pug
+      // modified
+      +articleSort(site.posts.filter((post)=>post.source.split('/')[1]===page.category.replace(/\s*/g, '')).sort('updated', -1))
+      //include includes/pagination.pug

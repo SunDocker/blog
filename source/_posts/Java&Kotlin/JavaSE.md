@@ -7,3 +7,61 @@ tags:
     - Java
 category: Java & Kotlin
 ---
+
+## Essential Grammar
+
+### Data Type
+
+
+
+### Variable Definition
+
+
+
+### Array
+
+ 
+
+## Class & Object
+
+
+
+
+
+## Extension & Polymorphism
+
+
+
+## Package
+
+
+
+## Common Utility Class
+
+
+
+## Collection
+
+
+
+## I/O Stream
+
+
+
+## Exception
+
+
+
+## Thread
+
+
+
+## Reflection
+
+
+
+## Annotation
+
+
+
+## Network Programming
