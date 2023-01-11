@@ -26,12 +26,12 @@ category: Computer Theory
   - 计算机基本系统
 - 数据库系统的功能
 
-  - `<u>`数据库可以实现**信息的积累与运用**`</u>`
+  - <u>数据库可以实现**信息的积累与运用**</u>
 
     - 积累：**形成数据库**
     - 运用：将积累的信息转换为**效益**
     - 提供数据库的**管理与控制**功能
-  - `<u>`数据库是**大数据**技术的基础`</u>`
+  - <u>数据库是**大数据**技术的基础</u>
 
     - 只求**关系**，不求因果
     - 从**部分数据集**上的分析，到**全数据集**上的分析
@@ -40,15 +40,15 @@ category: Computer Theory
 
 #### *数据库与表的概念：*
 
-- `<u>`数据库的概念 `</u>`：
+- <u>数据库的概念</u>：
 
   - 数据库是**电子化信息**的集合
   - 数据库是相互之间**有关联关系的表**的集合
-- `<u>`表的概念 `</u>`：以**按行按列**形式组织及展现的数据
+- <u>表的概念</u>：以**按行按列**形式组织及展现的数据
 
   > 表也可以称之为**关系**
   >
-- `<u>`表的构成 `</u>`：
+- <u>表的构成</u>：
 
   - 表名
   - 表标题（格式）
@@ -56,7 +56,7 @@ category: Computer Theory
   - 表结构
     - 行(row)/元组(tuple)/记录(record)
     - 列(column)/字段(field)/属性(attribute)/数据项(data item)t
-- `<u>`表的作用 `</u>`：
+- <u>表的作用</u>：
 
   - 表中描述了一批相互有**关联关系**的数据
   - 基于表提出了**关系及关系模型**，提出了**关系数据库**
@@ -65,8 +65,8 @@ category: Computer Theory
 
 #### *数据库管理系统的概念与功能：*
 
-- `<u>`概述`</u>`：数据库管理系统一种系统软件，它通过**结构化数据库语言**提供基本的数据库操作功能，运行程序**解析**语言并**执行**对数据库的具体操作
-- `<u>`提供数据库语言(SQL, Structrued Query Language)`</u>`
+- <u>概述</u>：数据库管理系统一种系统软件，它通过**结构化数据库语言**提供基本的数据库操作功能，运行程序**解析**语言并**执行**对数据库的具体操作
+- <u>提供数据库语言(SQL, Structrued Query Language)</u>
 
   > 主要从**用户使用**的角度讲解
   >
@@ -81,12 +81,12 @@ category: Computer Theory
   - 数据操纵语言(DML, Data Manipulation Language)：对数据库中的表进行**增加、删除、更改、检索**等操作
   - 数据控制语言(Data Control Language)：规定**用户**操作**数据**的**权限**，实施对数据库的**控制**
   - 数据库维护程序：提供对数据库维护的功能，包括转储、恢复、重组、性能检测、分析等，一般由DBA使用
-- `<u>`运行系统例行程序`</u>`
+- <u>运行系统例行程序</u>
 
   > 主要从**系统实现**的角度讲解
   >
 
-  > 这些例行程序本质上是用`<u>`**形式$\rarr$构造$\rarr$自动化**`</u>`的思想**实现**数据库管理系统
+  > 这些例行程序本质上是用<u>**形式$\rarr$构造$\rarr$自动化**</u>的思想**实现**数据库管理系统
   >
 
   - **编译**与执行控制程序
@@ -112,8 +112,8 @@ category: Computer Theory
 
 #### *三级模式两层映像：*
 
-- ⭐️`<u>`**三级模式两层映像**是数据库系统的标准结构`</u>`
-- `<u>`DBMS管理**数据**的三个层次`</u>`：
+- ⭐️<u>**三级模式两层映像**是数据库系统的标准结构</u>
+- <u>DBMS管理**数据**的三个层次</u>：
 
   - 外部层次/用户层次：某一**用户**能处理的数据，是全局数据的**一部分**
 
@@ -127,12 +127,12 @@ category: Computer Theory
 
     > **强调物理存储**
     >
-- `<u>`**模式、视图、映像**的概念`</u>`：
+- <u>**模式、视图、映像**的概念</u>：
 
   - 模式(Schema)：对数据库中数据的**结构性描述**，表现数据的**结构信息**
   - 视图(View)/数据(Data)：某一种**结构**下数据库中的**数据**
   - 映像(Mapping)：一种结构到另一种结构的**映射**
-- **`<u>`三级模式`</u>`**：
+- **<u>三级模式</u>**：
 
   - 局部/外部/外/用户/子 模式(External Schema)：某一**用户**能处理的**数据的结构描述**
 
@@ -149,7 +149,7 @@ category: Computer Theory
   - 内部/物理 模式(Internal Schema)：**存储**在介质上的**数据的结构描述**
 
     - 内部/物理 视图(Internal View)：**存储**在介质上的**数据**
-- **`<u>`两层映像`</u>`**：
+- **<u>两层映像</u>**：
 
   - E-C Mapping (External Schema-Conceptual Schema Mapping)
     - 概念：将**外部模式**映射为**概念模式**，从而实现**概念视图**向**外部视图**的转换
@@ -157,7 +157,7 @@ category: Computer Theory
   - C-I Mapping (Conceptual Schem-Internal Schema Mapping)
     - 概念：将**概念模式**映射为**内部模式**，从而实现**概念视图**向**内部视图**的转换
     - 优点：便于**计算机**进行存储和处理
-- `<u>`**两个独立性**`</u>`：
+- <u>**两个独立性**</u>：
 
   > 两个独立性是三级模式两层映像的重要优点
   >
@@ -172,18 +172,18 @@ category: Computer Theory
 
 #### *数据模型：*
 
-- `<u>`数据模型的概念`</u>`：
+- <u>数据模型的概念</u>：
 
   - 数据模型是**对模式的抽象**
   - 数据模型规定了**模式统一描述方式**，包括数据结构、操作和约束
-- `<u>`数据模型的常见种类`</u>`：
+- <u>数据模型的常见种类</u>：
 
-  - **`<u>`关系模型`</u>`**：
+  - **<u>关系模型</u>**：
 
     - 以表的形式组织数据
     - 规定所有模式都遵循**表的数据结构**，每个具体的模式都是拥有某些**属性**的表
     - 规定对表形式**数据的操作和约束**
-  - `<u>`层次模型`</u>`：
+  - <u>层次模型</u>：
 
     - 以树的形式组织数据
     - 用**实体型**作为数据记录
@@ -195,7 +195,7 @@ category: Computer Theory
       > 相当于树中的边
       >
     - 规定所有模式都要描述**实体型的含义**并规定**实体型之间的系型**
-  - `<u>`网状模型`</u>`：
+  - <u>网状模型</u>：
 
     - 以图的形式组织数据，同样有实体型和系型
   - Object-Orien
@@ -204,7 +204,7 @@ category: Computer Theory
 
 #### *数据库系统的发展：*
 
-- `<u>`四个阶段`</u>`：
+- <u>四个阶段</u>：
 
   - 数据库技术探索
   - 数据库技术确立
@@ -213,7 +213,7 @@ category: Computer Theory
     > 在该阶段提出了标准化数据库系统结构模型，也就是三级模式两层映像
     >
   - 数据库技术深化发展
-- `<u>`从**文件系统**到**数据库**`</u>`：
+- <u>从**文件系统**到**数据库**</u>：
 
   > 详见数据库系统笔记仓库
   >
@@ -225,7 +225,7 @@ category: Computer Theory
   - 数据库
     - 概述：由DBMS统一存取，维护数据组织形式及语义，以**记录**为单位，也可以**数据项**和**记录集合**为单位
     - 优点：DBMS数据及数据结构的定义和描述，让**数据与应用程序**解耦合，具有**两个独立性**；数据具有结构化，记录之间有关联，冗余小，易扩充；查询和统计高效；数据共享与安全
-- `<u>`从层次模型、网状模型数据库到**关系模型数据库**`</u>`：
+- <u>从层次模型、网状模型数据库到**关系模型数据库**</u>：
 
   - 层次模型与网状模型数据库
 
@@ -242,7 +242,7 @@ category: Computer Theory
     - 数据的**结构**：数据之间的关联关系由**表**的属性值来表征，结构描述简单
     - 数据的操作：数据检索操作不依赖于路径或过程信息，支持**非过程化的数据操作**；有效支持**记录集合**的操作
     - 理论：有较为完善的理论基础
-- `<u>`从**关系**数据库到**对象-关系**数据库、**面向对象**数据库`</u>`：
+- <u>从**关系**数据库到**对象-关系**数据库、**面向对象**数据库</u>：
 
   - 关系数据库
     - 按**行列**组织数据，遵循**关系第一范式**，要求**数据项不可再分**
@@ -257,7 +257,7 @@ category: Computer Theory
     - 半结构化数据库
     - 将**数据**与**数据的语义**合并在一起进行存储和管理
     - 面向**数据交换**
-- `<u>`从单一数据库到多数据库互联`</u>`：
+- <u>从单一数据库到多数据库互联</u>：
 
   - **ODBC作为接口**，规范程序书写，解开应用程序与数据库管理系统的耦合
   - 实现多种多样数据库的**开放式互联**
@@ -275,11 +275,11 @@ category: Computer Theory
 	- 完整性约束
 ```
 
-- `<u>`基本结构`</u>`：Relation/Table
+- <u>基本结构</u>：Relation/Table
   - 描述数据库各种**数据的基本结构**形式
-- `<u>`基本操作`</u>`：Relation Operator
+- <u>基本操作</u>：Relation Operator
   - 描述数据库**表之间**可能发生的各种操作（**关系运算**）
-- `<u>`完整性约束`</u>`：Integrity Constraints
+- <u>完整性约束</u>：Integrity Constraints
   - 描述**基本结构与操作**应当遵循的**约束条件**
 
 ---
@@ -293,7 +293,7 @@ category: Computer Theory
 	- 特殊的属性(组)
 ```
 
-- `<u>`关系/表的定义`</u>`
+- <u>关系/表的定义</u>
 
   - 域（Domain）：
 
@@ -330,7 +330,7 @@ category: Computer Theory
 
       - 关系模式是**关系的结构**，关系是关系模式下的**数据集合**
       - 同一关系模式下可以有很多关系
-- `<u>`关系/表的特性`</u>`
+- <u>关系/表的特性</u>
 
   - **列同质**：每一列中的分量来自**同一域**
   - **属性名不冲突**：关系模式中各**属性名必须不同**，对应的域可以相同
@@ -343,7 +343,7 @@ category: Computer Theory
     > 现实应用中，**表**可能不完全遵守此特性
     >
   - **第一范式**：属性不可再分
-- `<u>`特殊的属性(组)`</u>`
+- <u>特殊的属性(组)</u>
 
   - 候选码/候选键（Candidate Key）：关系中的一个**属性组**，其值能**唯一标识一个元组**，若去掉其中任何一个属性则不能唯一标识元组
 
@@ -419,10 +419,9 @@ category: Computer Theory
     &\{<a_1,a_2,...,a_n,b_1,b_2,...,b_n>|\\
     &<a_1,a_2,...,a_n>\in R~~\wedge<b_1,b_2,...,b_n>\in S\}
     \end{align}
-
-    $$
+  $$
   - 满足的性质：
-
+  
     - 交换律
     - 度数相加
     - 基数相乘
@@ -743,8 +742,8 @@ category: Computer Theory
 
 #### *Real world:*
 
-- `<u>`Abstraction level`</u>`: No Abstraction
-- `<u>`Key`</u>` of this level: **Demand**
+- <u>Abstraction level</u>: No Abstraction
+- <u>Key</u> of this level: **Demand**
 
   - **Comprehension and Expression** of demand
   - The kinds of demand:
@@ -759,9 +758,9 @@ category: Computer Theory
 
 #### *Conceptual / Information world:*
 
-- `<u>`Ways abstracting`</u>` from *real world* to *conceptual world*: **Data Modeling**
-- `<u>`Abstraction level`</u>`: **Conceptual** Level
-- `<u>`Key`</u>` of this level: **Conceptual Data Model**
+- <u>Ways abstracting</u> from *real world* to *conceptual world*: **Data Modeling**
+- <u>Abstraction level</u>: **Conceptual** Level
+- <u>Key</u> of this level: **Conceptual Data Model**
 
   - **Concept** of conceptual model: the model **expressing information world**
 
@@ -774,9 +773,9 @@ category: Computer Theory
 
 #### *Data / Computer world:*
 
-- `<u>`Ways abstracting`</u>` from *conceptual world* to *computer world*: **Database Design**
-- `<u>`Abstraction level`</u>`: **Implement** Level
-- `<u>`Key`</u>` of this level: **Data Model**
+- <u>Ways abstracting</u> from *conceptual world* to *computer world*: **Database Design**
+- <u>Abstraction level</u>: **Implement** Level
+- <u>Key</u> of this level: **Data Model**
   - **Concept** of data model: the model **expressing computer world**
   - **Independence**: independent of **physical system**
 - Two levels in computer world itself:
