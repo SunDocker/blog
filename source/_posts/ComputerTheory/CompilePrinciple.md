@@ -460,7 +460,7 @@ category: Computer Theory
 
 - 主要任务:
 
-  - 从***token***序列**中，识别**语法成分/短语**，构造**语法分析树**，指导**翻译过程
+  - 从***token***序列中，识别**语法成分/短语**，构造**语法分析树**，指导翻译过程
 - 基本方法:
 
   - 自顶向下: 自顶向下构造语法分析树, 根据**输入符**，选择合适的**产生式**推导**最左非终结符**, 直到推导出完整的输入串
@@ -1288,16 +1288,15 @@ category: Computer Theory
 
     $$
     C\rarr\epsilon
-
     $$
-
+    
     $$
     对应的结点
 
 
     > 这里把类型看成由**基本类型+数组标志组成**，所以这两部分之间需要传递信息。如果把类型看成**基本类型或数组类型两类**，就不需要这样传递了
     >
-
+    
     $$
 - 副作用
 
@@ -1308,92 +1307,84 @@ category: Computer Theory
 
     $$
     \begin{align*} &a_1:\{\\ &~~~~offset=0\\ &\} \end{align*}
-
     $$
-
+    
     > 程序形成前要将 `offset`置为初始值
     >
   - **声明语句**的生成：
-
+  
     - $D\rarr T~id;\{a_1\}D$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~enter(id.lexem,~T.type,~offset);\\ &~~~~offset=offset+T.width;\\ &\} \end{align*}
-
       $$
-
+      
       > 声明语句形成后在**符号表**创建记录，并后移 `offset`
       >
     - $D\rarr\epsilon$
   - **标识符类型**的形成：
-
+  
     - $T\rarr B\{a_1\}C\{a_2\}$
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~t=B.type;\\ &~~~~w=B.width;\\ &\}\\ &a_2:\{\\ &~~~~T.type=C.type;\\ &~~~~T.width=C.width;\\ &\} \end{align*}
-
-      $$
-
-      > **基本类型**形成后用 `t`和 `w`记录**类型和宽度**，以便向后传递；
+    $$
+      
+    > **基本类型**形成后用 `t`和 `w`记录**类型和宽度**，以便向后传递；
       >
       > **标识符类型**形成后要设置**类型表达式和宽度**
       >
-
-      > 另一种方案(归约角度)：
+      
+    > 另一种方案(归约角度)：
       >
       > - `T -> int {T.type = int, T.width = 4}`
       > - `T -> real {T.type = real, T.width = 8}`
       > - `T -> array[num] of T1 {T.type = array(num.val, T1.type); T.width = num.val * T1.width}`
       >
     - $T\rarr\uarr T_1\{a_1\}$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~T.type=pointer(T_1.type);\\ &~~~~T.width=4;\\ &\} \end{align*}
-
       $$
-
+    
       > 形成指针后要设置其**类型和宽度**
-      >
+    >
   - **基本类型**的形成：
 
     - $B\rarr int\{a_1\}$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~B.type=int;\\ &~~~~B.width=4;\\ &\} \end{align*}
-
-      $$
-
-      > 形成整型后要记录其类型和宽度
+    $$
+      
+    > 形成整型后要记录其类型和宽度
       >
     - $B\rarr real\{a_1\}$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~B.type=real;\\ &~~~~B.width=8;\\ &\} \end{align*}
-
       $$
-
+    
       > 形成实型后要设置其类型和宽度
-      >
+    >
   - **数组标志**的形成：
 
     - $C\rarr\epsilon\{a_1\}$
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~C.type=t;\\ &~~~~C.width=w;\\ &\} \end{align*}
-
-      $$
-
-      > 数组标志结束后要从 `t`和 `w`中读取信息，以便后续**数组类型和宽度**的计算
+    $$
+      
+    > 数组标志结束后要从 `t`和 `w`中读取信息，以便后续**数组类型和宽度**的计算
       >
     - $C\rarr[num]C_1\{a_1\}$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~C.type=array(num.val,C_1.type);\\ &~~~~C.width=num.val*C_1.width;\\ &\} \end{align*}
-
       $$
-
+    
       > 形成数组标志时要用**数组构造符**其设置类型并**计算宽度**
-      >
+    >
 
 ---
 
@@ -1545,94 +1536,84 @@ category: Computer Theory
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~p=lookup(id.lexeme);\\ &~~~~if~p==nil~then~error;\\ &~~~~gen(p=E.addr);\\ &\} \end{align*}
-
-      $$
-
-      > 形成**单一标识符**赋值语句时，检查是否已经声明，并生成**标识符赋值**的三地址码
+    $$
+      
+    > 形成**单一标识符**赋值语句时，检查是否已经声明，并生成**标识符赋值**的三地址码
       >
     - $S\rarr L=E;\{a_1\}$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~gen(L.array[L.offset]=E.addr);\\ &\} \end{align*}
-
       $$
-
+    
       > 形成**数组元素**赋值语句时生成**元素地址索引并给其赋值**的三地址码
-      >
+    >
   - **算术表达式**的形成
-
+  
     - $E\rarr E_1+E_2\{a_1\}$
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~E.addr=newtemp();\\ &~~~~gen(E.addr=E_1.addr+E_2.addr);\\ &\} \end{align*}
-
       $$
-
+      
       > 形成加法运算表达式时生成用**临时变量存放运算结果**的三地址码
       >
     - $E\rarr E_1*E_2\{a_1\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~E.addr=newtemp();\\ &~~~~gen(E.addr=E_1.addr*E_2.addr);\\ &\} \end{align*}
-
       $$
-
+      
       > 形成乘法运算表达式时生成用**临时变量存放运算结果**的三地址码
       >
     - $E\rarr-E_1\{a_1\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~E.addr=newtemp();\\ &~~~~gen(E.addr=uminus~E_1.addrr);\\ &\} \end{align*}
-
       $$
-
+      
       > 形成取相反数运算表达式时生成用**临时变量存放运算结果**的三地址码
       >
     - $E\rarr(E_1)\{a_1\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~E.addr=E_1.addr;\\ &\} \end{align*}
-
       $$
-
+      
       > 形成括号运算表达式时传递变量地址
       >
     - $E\rarr id\{a_1\}$
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~E.addr=lookup(id.lexeme);\\ &~~~~if~E.addr==nil~then~error;\\ &\} \end{align*}
-
       $$
-
+      
       > 由标识符形成表达式时要检查是否**声明**并**记录标识符地址**
       >
   - **数组元素表达式**的形成
-
+  
     - $E\rarr L\{a_1\}$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~E.addr=newtemp();\\ &~~~~gen(E.addr=L.array[L.offset]);\\ &\} \end{align*}
-
       $$
-
+      
       > 形成**完整数组元素表达式**时生成用**临时变量存放数组元素地址索引**的三地址码
       >
     - $L\rarr id[E]\{a_1\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~L.array=lookup(id.lexeme);\\ &~~~~if~L.array==nil~then~error;\\ &~~~~L.type=L.array.type.elem;\\ &~~~~L.offset=newtemp();\\ &~~~~gen(L.offset=E.addr*L.type.width);\\ \} \end{align*}
-
       $$
-
+      
       > 确定数组**标识符**后，传递**数组名**、数组元素**类型**，计算数组元素**偏移量**，并生成 用类型**宽度**和表达式值计算**偏移量** 的三地址码
       >
     - $L\rarr L_1[E]\{a_1\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~L.array=L_1.array;\\ &~~~~L.type=L_1.type.elem;\\ &~~~~t=newtemp();\\ &~~~~gen(t=E.addr*L.type.width);\\ &~~~~L.offset=newtemp();\\ &~~~~gen(L.offset=L_1.offset+t);\\ \} \end{align*}
-
       $$
-
+      
       > 更高维数组元素形成时，传递**数组名**、数组**类型**，计算数组元素偏移量，生成 借助**临时变量**计算**更深维度偏移量** 的三地址码
       >
 
@@ -1807,73 +1788,66 @@ category: Computer Theory
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~gen(if~E_1.addr~relop~E_2.addr~goto~B.ture);\\ &~~~~gen(goto~B.false);\\ &\}\\ \end{align*}
-
-      $$
-
-      > 生成关系运算符的**跳转**三地址码
+    $$
+      
+    > 生成关系运算符的**跳转**三地址码
       >
   - 由**逻辑值**形成布尔表达式
-
-    - $B\rarr true\{a_1\}$
-
-      $$
+  
+  - $B\rarr true\{a_1\}$
+  
+    $$
       \begin{align*} &a_1:\{\\ &~~~~gen(goto~B.true);\\ &\}\\ \end{align*}
-
-      $$
-
-      > 直接生成跳转到**真出口**的三地址码
-      >
+    $$
+    
+    > 直接生成跳转到**真出口**的三地址码
+    >
       > 这里所说的“**出口**”指的就是要跳转到的**指令标号**
       >
     - $B\rarr false\{a_1\}$
-
+    
+    $$
+    \begin{align*} &a_1:\{\\ &~~~~gen(goto~B.false);\\ &\}\\ \end{align*}
       $$
-      \begin{align*} &a_1:\{\\ &~~~~gen(goto~B.false);\\ &\}\\ \end{align*}
-
-      $$
-
-      > 直接生成跳转到**假出口**的三地址码
-      >
-  - 通过**逻辑运算符**连接布尔表达式
-
+    
+    > 直接生成跳转到**假出口**的三地址码
+    >
+- 通过**逻辑运算符**连接布尔表达式
+  
     - $B\rarr(\{a_1\}B_1)$
-
-      $$
+  
+    $$
       \begin{align*} &a_1:\{\\ &~~~~B_1.true=B.true;\\ &~~~~B_1.false=B.false;\\ &\}\\ \end{align*}
-
-      $$
-
-      > 计算继承属性，让其**真、假出口**与父表达式保持相等
-      >
+  $$
+      
+    > 计算继承属性，让其**真、假出口**与父表达式保持相等
+    >
     - $B\rarr not\{a_1\}B_1$
-
-      $$
+  
+    $$
       \begin{align*} &a_1:\{\\ &~~~~B_1.true=B.false;\\ &~~~~B_1.false=B.true;\\ &\}\\ \end{align*}
-
       $$
-
+  
       > 让其**真、假出口**与父表达式保持相反
-      >
-    - $B\rarr\{a_1\}B_1~or~\{a_2\}B_2$
-
+    >
+  - $B\rarr\{a_1\}B_1~or~\{a_2\}B_2$
+    
+    $$
+    \begin{align*} &a_1:\{\\ &~~~~B_1.false=newlabel();\\ &~~~~B_1.true=B.true;\\ &\}\\ &a_2:\{\\ &~~~~label(B_1.false);\\ &~~~~B_2.true=B.true;\\ &~~~~B_2.false=B.false;\\ &\}\\ \end{align*}
       $$
-      \begin{align*} &a_1:\{\\ &~~~~B_1.false=newlabel();\\ &~~~~B_1.true=B.true;\\ &\}\\ &a_2:\{\\ &~~~~label(B_1.false);\\ &~~~~B_2.true=B.true;\\ &~~~~B_2.false=B.false;\\ &\}\\ \end{align*}
-
-      $$
-
-      > 计算B1继承属性时，真出口可以确定是父B的真出口，但假出口的代码是B2，还没生成，所以newlabel
+      
+  > 计算B1继承属性时，真出口可以确定是父B的真出口，但假出口的代码是B2，还没生成，所以newlabel
       >
-      > 计算B2继承属性时，马上要生成B2的代码了，所以B1的假出口可以确定了，B2的真假出口也可以由父B确定
-      >
+    > 计算B2继承属性时，马上要生成B2的代码了，所以B1的假出口可以确定了，B2的真假出口也可以由父B确定
+    >
     - $B\rarr\{a_1\}B_1~and~\{a_2\}B_2$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~B_1.true=newlabel();\\ &~~~~B_1.false=B.false;\\ &\}\\ &a_2:\{\\ &~~~~label(B_1.true);\\ &~~~~B_2.true=B.true;\\ &~~~~B_2.false=B.false;\\ &\}\\ \end{align*}
-
-      $$
-
+    $$
+      
       > 与 `or`类似
-      >
+  >
 - 语法规则和语义动作（真假出口表示法、仅为L-SDD）
 
   - `B -> E1 relop E2`
@@ -1995,53 +1969,48 @@ category: Computer Theory
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~S.next=newlabel();\\ &\}\\ &a_2:\{\\ &~~~~label(S.next);\\ &\} \end{align*}
-
-      $$
-
-      > 形成代码块前，先生成存放其后继指令的**地址空间**（因为这是继承属性，规定要这么算，而且**代码块内**可能会用到）；
+    $$
+      
+    > 形成代码块前，先生成存放其后继指令的**地址空间**（因为这是继承属性，规定要这么算，而且**代码块内**可能会用到）；
       >
       > 形成代码块后，将**下一条**三地址指令标号赋值给其**后继指令**
       >
     - $S\rarr\{a_1\}S_1\{a_2\}S_2$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~S_1.next=newlabel();\\ &\}\\ &a_2:\{\\ &~~~~label(S_1.next);\\ &~~~~S_2.next=S.next\\ &\} \end{align*}
-
       $$
-
+    
       > next继承属性肯定是要在符号出现前计算的，能用父S确定的就直接给父S的next，确定不了的（相应代码结构还没出现）就newlabel
-      >
+    >
   - **完整赋值语句**的形成：$S\rarr id=E;\{a\}|L=E;\{a\}$
-
+  
     > 上一小节已经讲过，这里省略
     >
   - 控制流结构的形成
-
+  
     - $S\rarr if~\{a_1\}B~then~\{a_2\}S_1$
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~B.true=newlabel();\\ &~~~~B.false=S.next;\\ &\}\\ &a_2:\{\\ &~~~~label(B.ture);\\ &~~~~S_1.next=S.next;\\ &\} \end{align*}
-
       $$
-
+      
       > 形成布尔表达式前计算继承属性，false能用父S确定的，true还没生成，所以要等到S1之前用label赋值，然后S1的next继承属性用父S确定即可
       >
     - $S\rarr if~\{a_1\}B~then~\{a_2\}S_1~\{a_3\}else~\{a_4\}S_2$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~B.true=newlabel();\\ &~~~~B.false=newlabel();\\ &\}\\ &a_2:\{\\ &~~~~label(B.ture);\\ &~~~~S_1.next=S.next;\\ &\}\\ &a_3:\{\\ &~~~~gen(goto~S.next);\\ &\}\\ &a_4:\{\\ &~~~~label(B.false);\\ &~~~~S_2.next=S.next;\\ &\} \end{align*}
-
       $$
-
+      
       > 与 `if-then`类似，要么能用父S.next确定，要么还没生成，先newlabel，到对应的位置再label；必须要注意的是，记得**生成S1之后的goto**
       >
     - $S\rarr while~\{a_1\}B~do~\{a_2\}S_1\{a_3\}$
-
+    
     $$
     \begin{align*} &a_1:\{\\ &~~~~S.begin=newlabel();\\ &~~~~label(S.begin);\\ &~~~~B.true=newlabel();\\ &~~~~B.false=S.next;\\ &\}\\ &a_2:\{\\ &~~~~label(B.true);\\ &~~~~S_1.next=S.begin;\\ &\}\\ &a_3:\{\\ &~~~~gen(goto~S.begin);\\ &\}\\ \end{align*}
-
     $$
-
+    
     > 与前面 `if`的类似，这里单独注意一下 `S.begin`和 `goto`，因为 `while`的特点就是会跳回前面
     >
 - 语法规则和语义动作（真假出口表示法、仅为L-SDD）
@@ -2098,26 +2067,24 @@ category: Computer Theory
 
   $$
   switch~E\{a_1\}\\ case~V_1:\{a_2\}S_1\{a_3\}\\ case~V_2:\{a_4\}S_2\{a_5\}\\ ...\\ case~V_{n-1}:\{a_{2n-2}\}S_{n-1}\{a_{2n-1}\}\\ default~:\{a_{2n}\}S_n\{a_{2n+1}\}
-
   $$
-
+  
   - 新增特殊变量
-
+  
     - `Vk`：第 `k`个分支的**入口值**
     - `Lk`：存放第 `k+1`个分支**第一条指令标号**的地址空间
     - `t`：存放分支依据**表达式的值**
     - `next`：存放整体代码块**下一条指令标号**的地址空间
-
+  
     $$
     \begin{align*} &a_1:\{\\ &~~~~t=newtemp();\\ &~~~~gen(t=E.addr);\\ &~~~~next=newlabel();\\ &\}\\ &a_{2k-2}:\{\\ &~~~~label(L_{k-1});\\ &~~~~L_k=newlabel();\\ &~~~~gen(if~t~!=V_k~goto~L_k);\\ &\}\\ &a_{2k-1}:\{\\ &~~~~gen(goto~next);\\ &\}\\ &a_{2n}:\{\\ &~~~~label(L_{n-1});\\ &\}\\ &a_{2n+1}:\{\\ &~~~~label(next);\\ &\}\\ \end{align*}
-
-    $$
+  $$
   - `switch-case`语句开始分支测试前，生成将依据**表达式值**保存至临时变量的三地址码，并为存放**整体代码块下一条指令的标号**开辟内存空间
-
+  
     > 那个 `next=newlabel()`放在第一次使用 `next`前也可以
     >
   - 每个测试分支中，形成代码块前，先给该**分支对应标号赋值**，再生成**不满足条件跳转**至下一个分支标号的三地址码；形成代码块后，生成跳转至整体代码块下一条指令的三地址码
-
+  
     > 第一个测试分支不需要给自己的标号赋值，只需要生成不满足条件的跳转三地址码
     >
   - 默认分支中，形成代码块前，给该**分支对应标号赋值**；形成代码块后，给**整体代码块下一条指令对应**的标号赋值
@@ -2125,26 +2092,24 @@ category: Computer Theory
 
   $$
   switch~E\{a_1\}\\ case~V_1:\{a_2\}S_1\{a_3\}\\ case~V_2:\{a_4\}S_2\{a_5\}\\ ...\\ case~V_{n-1}:\{a_{2n-2}\}S_{n-1}\{a_{2n-1}\}\\ default~:\{a_{2n}\}S_n\{a_{2n+1}\}
-
-  $$
-
-  - 新增特殊变量
-
-    - `test`：分支集中测试块的第一条指令标号地址
+$$
+  
+- 新增特殊变量
+  
+  - `test`：分支集中测试块的第一条指令标号地址
   - 新增副作用
-
-    - `map`：记录分支测试**入口值**与分支测试**标号**的映射关系，方便批量生成**分支测试代码**
-
-    $$
+  
+  - `map`：记录分支测试**入口值**与分支测试**标号**的映射关系，方便批量生成**分支测试代码**
+  
+  $$
     \begin{align**} &a_1:\{\\ &~~~~t=newtemp();\\ &~~~~gen(t=E.addr);\\ &~~~~test=newlabel();\\ &~~~~gen(goto~test);\\ &~~~~next=newlabel();\\ &\}\\ &a_{2k-2}:\{\\ &~~~~L_k=newlabel();\\ &~~~~label(L_{k});\\ &~~~~map(V_k,L_k);\\ &\}\\ &a_{2k-1}:\{\\ &~~~~gen(goto~next);\\ &\}\\ &a_{2n}:\{\\ &~~~~L_n=newlabel();\\ &~~~~label(L_{n});\\ &\}\\ &a_{2n+1}:\{\\ &~~~~gen(goto~next);\\ &~~~~label(test);\\ &~~~~gen(if~t=V_k~goto~L_k);\\ &\}\\ \end{align**}
-
-    $$
-  - `switch-case`语句开始分支测试前，生成将依据**表达式值**保存至临时变量的三地址码，生成**跳转至集中分支测试**的三地址码，并为存放**整体代码块下一条指令的标号**开辟内存空间
+  $$
+- `switch-case`语句开始分支测试前，生成将依据**表达式值**保存至临时变量的三地址码，生成**跳转至集中分支测试**的三地址码，并为存放**整体代码块下一条指令的标号**开辟内存空间
   - 每个测试分支中，形成代码块前，开辟该分支对应的标号，并给**标号赋值**为下一条指令，再将该分支测试**入口值**与**标号**的添加至映射表；形成代码块后，生成跳转至整体代码块下一条指令的三地址码
   - 默认分支中，形成代码块前，开辟该分支对应的标号，并给**标号赋值**为下一条指令；形成代码块后，生成跳转至整体代码块下一条指令的三地址码，再给**集中分支测试的标号**赋值，然后根据**映射表**批量生成分支**入口值对比并跳转至对应标号**的三地址码
-
+  
     > 可以增加一种 `case`指令，`case t V L`等同于 `if t==V goto L`，但 `case`指令更容易被最终的代码生成器**探测**到，从而对这些指令进行**特殊处理**
-    >
+  >
 
 ---
 
@@ -2218,31 +2183,28 @@ category: Computer Theory
 
     $$
     \begin{align*} &a_1:\{\\ &~~~~n=0;\\ &~~~~for~q中的每个t~do\\ &~~~~~~~~gen(param~t);\\ &~~~~~~~~n=n+1;\\ &~~~~gen(call~id.addr,n);\\ &\}\\ \end{align*}
-
     $$
-
+    
     > 过程调用框架形成后，根据队列 `q`集中生成所有**设置实参**的 `param`三地址指令，最后再生成一条**过程调用**的三地址指令
     >
   - 形成**参数列表**
-
+  
     - $Elist\rarr E\{a_1\}$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~将q初始化为只包含E.addr的队列;\\ &\}\\ \end{align*}
-
-      $$
-
-      > 参数列表开始形成时初始化队列 `q`
+    $$
+      
+    > 参数列表开始形成时初始化队列 `q`
       >
     - $Elist\rarr Elist_1,E\{a_1\}$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~将E.addr添加到q的队尾;\\ &\}\\ \end{align*}
-
       $$
-
+    
       > 参数列表中每增加一个参数就添加一个参数地址至队列 `q`中
-      >
+    >
 
 ### 6.6 回填
 
@@ -2280,60 +2242,54 @@ category: Computer Theory
 
     $$
     \begin{align*} &a_1:\{\\ &~~~~B.truelist=makelist(nextquad);\\ &~~~~B.falselist=makelist(nextquad+1);\\ &~~~~gen(if~E_1.addr~relop~E_2.addr~goto~\_);\\ &~~~~gen(goto~\_);\\ &\}\\ \end{align*}
-
     $$
-
+    
     > 先设置待**填充跳转指令列表**，把**即将生成的两条指令**分别加入真假出口对应的两个列表，再生成关系运算符的**待填充跳转三地址码**
     >
   - 由**逻辑值**形成布尔表达式
-
+  
     - $B\rarr true\{a_1\}$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~B.truelist=makelist(nextquad);\\ &~~~~gen(goto~\_);\\ &\}\\ \end{align*}
-
-      $$
-
-      > 先设置待**填充跳转指令列表**，把**即将生成的指令**加入真出口对应的列表，再生成**待填充的跳转三地址码**
+    $$
+      
+    > 先设置待**填充跳转指令列表**，把**即将生成的指令**加入真出口对应的列表，再生成**待填充的跳转三地址码**
       >
     - $B\rarr false\{a_1\}$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~B.falselist=makelist(nextquad);\\ &~~~~gen(goto~\_);\\ &\}\\ \end{align*}
-
       $$
-
+    
       > 先设置待**填充跳转指令列表**，把**即将生成的指令**加入假出口对应的列表，再生成**待填充的跳转三地址码**
-      >
+    >
   - 通过**逻辑运算符**连接布尔表达式
-
+  
     - $B\rarr(B_1)\{a_1\}$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~B_1.truelist=B.truelist;\\ &~~~~B_1.falselist=B.falselist;\\ &\}\\ \end{align*}
-
       $$
-
+      
       > 子表达式形成后，让其**真、假出口列表**与父表达式保持相等
       >
     - $B\rarr not~B_1\{a_1\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~B_1.truelist=B.falselist;\\ &~~~~B_1.falselist=B.truelist;\\ &\}\\ \end{align*}
-
       $$
-
+      
       > 相反子表达式形成后，让其**真、假出口列表**与父表达式保持相反
       >
     - $B\rarr B_1~or~M~B_2\{a_1\}$
-
+    
       $M\rarr\epsilon\{a_2\}$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~backpatch(B_1.falselist,M.quad);\\ &~~~~B.truelist=merge(B_1.truelist,B_2.truelist);\\ &~~~~B.falselist=B_2.falselist;\\ &\}\\ &a_2:\{\\ &~~~~M.quad=nextquad;\\ &\}\\ \end{align*}
-
       $$
-
+      
       > 子表达式形成并连接后：
       >
       > - 处理不短路的跳转位置：用记录下的第二个布尔表达式的**第一条指令标号**回填第一个子表达式的**假出口列表**
@@ -2345,14 +2301,13 @@ category: Computer Theory
       > 父表达式的真假出口列表待**控制流语句**形成后回填
       >
     - $B\rarr B_1~and~M~B_2\{a_1\}$
-
+    
       $M\rarr\epsilon\{a_2\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~backpatch(B_1.truelist,M.quad);\\ &~~~~B.falselist=merge(B_1.falselist,B_2.falselist);\\ &~~~~B.truelist=B_2.truelist;\\ &\}\\ &a_2:\{\\ &~~~~M.quad=nextquad;\\ &\}\\ \end{align*}
-
       $$
-
+      
       > 子表达式形成并连接后：
       >
       > - 处理不短路的跳转位置：用记录下的第二个布尔表达式的**第一条指令标号**回填第一个子表达式的**真出口列表**
@@ -2391,56 +2346,51 @@ category: Computer Theory
 
       $$
       \begin{align*} &a_1:\{\\ &~~~~backpatch(S.nextlist,nextquad);\\ &\}\\ \end{align*}
-
-      $$
-
-      > 形成代码块后，用**下一条**三地址指令标号回填整体代码块的**后继列表**；
+    $$
+      
+    > 形成代码块后，用**下一条**三地址指令标号回填整体代码块的**后继列表**；
       >
       > 这条回填产生式是我自己猜的，我希望是对的
       >
     - $S\rarr S_1~M~S_2\{a_1\}$
-
-      $$
+    
+    $$
       \begin{align*} &a_1:\{\\ &~~~~backpatch(S_1.nextlist, M.quad)\\ &~~~~S.nextlist=S_2.nextlist\\ &\}\\ \end{align*}
-
-      $$
+    $$
 
     > 两个代码块拼接完成后，先用记录下的第二个代码块的**第一条指令标号**回填第一个代码块的**后继列表**，再将第二个代码块的后继列表赋值给整体代码块的后继列表
-    >
+  >
   - **完整赋值语句**的形成：$S\rarr id=E;\{a\}|L=E;\{a\}$
-
+  
     $$
     \begin{align*} &a:\{\\ &~~~~S.nextlist=null;\\ &\}\\ \end{align*}
-
     $$
-
+    
     > 完整赋值语句形成后，直接让代码块**后继列表为空**即可；
     >
     > 因为赋值语句只是顺序执行，不需要特殊的跳转
     >
   - 控制流结构的形成
-
+  
     - $S\rarr if~B~then~M~S_1\{a_1\}$
-
+  
       $$
       \begin{align*} &a_1:\{\\ &~~~~backpatch(B.truelist, M.quad);\\ &~~~~S.nextlist=merge(B.falselist,S_1.nextlist);\\ &\}\\ \end{align*}
-
       $$
-
+      
       > 单分支控制流形成后：
       >
       > - 真出口：回填子代码块**第一条指令**
       > - 假出口：与子代码块的 `nextlist`合并，给到父代码块。因为 `S.next`完全没出现在这条产生式中
       >
     - $S\rarr if~B~then~M_1~S_1~N~else~M_2~S_2\{a_1\}$
-
+    
       $N\rarr\epsilon\{a_3\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~backpatch(B.truelist,M1.quad);\\ &~~~~backpatch(B.falselist,M2.quad);\\ &~~~~S.nextlist=merge(merge(S_1.nextlist,N.nextlist),S_2.nextlist);\\ &\}\\ &a_3:\{\\ &~~~~N.nextlist=makelist(nextquad);\\ &~~~~gen(goto~\_);\\ &\}\\ \end{align*}
-
       $$
-
+      
       > 双分支控制流形成后：
       >
       > - 真出口：回填第一个子代码块**第一条指令**
@@ -2448,12 +2398,11 @@ category: Computer Theory
       > - 中途跳转出口：与两个**子代码块**的 `nextlist`合并然后给到父代码块
       >
     - $S\rarr while~M_1~B~do~M_2~S_1\{a_1\}$
-
+    
       $$
       \begin{align*} &a_1:\{\\ &~~~~backpatch(S_1.nextlist,M_1.quad);\\ &~~~~backpatch(B.truelist,M_2.quad);\\ &~~~~S.nextlist=B.falselist;\\ &~~~~gen(goto~M_1.quad);\\ &\}\\ \end{align*}
-
       $$
-
+      
       > 循环控制流形成后：
       >
       > - 真出口：回填子代码块**第一条指令**
@@ -2807,10 +2756,9 @@ category: Computer Theory
 
     $$
     R_0、R_1、...、R_{n-1}
-
-    $$
-
-    $$
+$$
+    
+$$
 
 
 
